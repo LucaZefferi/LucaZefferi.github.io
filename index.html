@@ -7,6 +7,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -56,40 +58,41 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="service.html" class="nav-item nav-link">Servizi</a>
-                        <a href="about.html" class="nav-item nav-link">Chi siamo</a>
-                       <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="faq.html" class="dropdown-item">FAQs</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                        <a href="index.html" class="nav-item nav-link active" id="nav-home">Home</a>
+                        <a href="service.html" class="nav-item nav-link" id="nav-servizi">Servizi</a>
+                        <a href="about.html" class="nav-item nav-link" id="nav-chi-siamo">Chi siamo</a>
+                        <a href="contact.html" class="nav-item nav-link" id="nav-contatti">Contatti</a>
+                        <img id="current-lan"  style="width: 30px; margin-right: 5px;" src="img/it.png" alt="">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="nav-lingua">Lingua</a>
+                            <div class="dropdown-menu bg-light mt-2">                                
+                                <a class="dropdown-item" onclick="changeLanguage('it')" id="nav-lingua-it">
+                                    <img  style="width: 30px" src="img/it.png" alt=""> IT
+                                </a> 
+                                <a class="dropdown-item" onclick="changeLanguage('en')" id="nav-lingua-en">
+                                    <img  style="width: 30px;" src="img/uk.png" alt=""> EN
+                                </a>                                   
                             </div>
-                        </div>-->
-                        <a href="contact.html" class="nav-item nav-link">Contatti</a>
+                        </div>
                     </div>
-
+                    
                 </div>
             </nav>
         </div>
     </div>
     <!-- Navbar End -->
-
-
+   
     <!-- Hero Start -->
     <div class="container-fluid pt-5 bg-primary hero-header mb-5" id="hero-start">
         <div class="container pt-5">
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
-                    <div class="btn btn-sm border rounded-pill text-white px-3 mb-3 animated slideInRight">Qui per aiutarti</div>
-                    <h1 class="display-4 text-white mb-4 animated slideInRight">GlobalService360 per il tuo business</h1>
-                    <p class="text-white mb-4 animated slideInRight">Tempor rebum no at dolore lorem clita rebum rebum ipsum
+                    <div class="btn btn-sm border rounded-pill text-white px-3 mb-3 animated slideInRight" id="pill-hero">Qui per aiutarti</div>
+                    <h1 class="display-4 text-white mb-4 animated slideInRight" id="text-hero">GlobalService360 per il tuo business</h1>
+                    <p class="text-white mb-4 animated slideInRight" id="p-hero">Tempor rebum no at dolore lorem clita rebum rebum ipsum
                         rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit</p>
-                    <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInRight">Scopri di più</a>
-                    <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contattaci</a>
+                    <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInRight read">Scopri di più</a>
+                    <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight contact">Contattaci</a>
                 </div>
                 <div class="col-lg-6 align-self-end text-center text-lg-end">
                     <img class="img-home" src="img/world.png" alt="">
@@ -450,7 +453,6 @@
     <!-- Testimonial End -->
 
 
-
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5">
         <div class="container py-5">
@@ -531,6 +533,15 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/translate.js"></script>
+    
+    
+    
 </body>
 
 </html>
+
+
+
+
+

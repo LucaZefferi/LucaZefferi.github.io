@@ -60,6 +60,6 @@
             '<i class="bi bi-chevron-right"></i>'
         ]
     });
-    
+  
 })(jQuery);
 
