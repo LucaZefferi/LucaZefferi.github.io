@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Quiz Game</title>
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+
+            
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #f0f0f0;
+                cursor: none;
+                font-family: 'Luckiest Guy', cursive, sans-serif;
+                background: url("wp-1.svg") fixed center;
+                background-size: cover;
+            }
+
+            #gameArea {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            #gameCanvas {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            #question {
+                display: none;
+                position: absolute;
+                min-width: 300px;
+                top: 50px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 2.2pc;
+                color: #fff;
+                /*background-color: rgba(145, 79, 30, 0.9);
+                background-color: rgba(125,146,177, 0.9);*/
+                padding: 10px 20px;
+                border-radius: 20px;
+                text-shadow: 0 30px 8px rgba(0, 0, 0, 0.3);
+                z-index: 10;
+                animation: fadeInFromTop 1s ease-out forwards;
+            }
+
+
+            
+            #countdown {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                font-size: 80pt;
+                box-shadow: 0 30px 8px rgba(0, 0, 0, 0.3);
+                color: white;
+                background-color: rgba(145, 79, 30, 0.9);
+                background-color: rgba(125,146,177, 0.9);
+                z-index: 10;
+                opacity: 1;
+                animation: fadeInFromTop 1s ease-out forwards;
+            }
+
+
+
+            .circle {
+                height: 24px;
+                width: 24px;
+                border-radius: 24px;
+                background-color: black;
+                position: fixed;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: 99999999;
+            }
+
+            .button-82-pushable {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: none;
+                background: transparent;
+                padding: 0;
+                cursor: pointer;
+                outline-offset: 4px;
+                transition: filter 250ms;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                animation: fadeInFromTop 1s ease-out forwards;
+            }
+
+
+
+            .button-82-front {
+                width: 600px;
+                height: 600px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                position: relative;
+                padding: 12px 27px;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                color: white;
+                background-color: rgba(145, 79, 30, 0.9);
+                background: url(start-button.svg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                will-change: transform;
+                transform: translateY(-4px);
+                font-family: 'Luckiest Guy', cursive, sans-serif;
+                transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+                filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
+                
+                
+            }
+
+            @media (min-width: 768px) {
+                .button-82-front {
+                    font-size: 1.25rem;
+                    padding: 12px 42px;
+                }
+            }
+
+            .button-82-pushable:hover {
+                filter: brightness(110%);
+                -webkit-filter: brightness(110%);
+            }
+
+            .button-82-pushable:hover .button-82-front {
+                transform: translateY(-6px);
+                transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+            }
+
+            .button-82-pushable:active .button-82-front {
+                transform: translateY(-2px);
+                transition: transform 34ms;
+            }
+
+            .button-82-pushable:focus:not(:focus-visible) {
+                outline: none;
+            }
+
+            /* Media Queries per la Responsività */
+            @media (max-width: 1200px) {
+                #question {
+                    font-size: 2pc;
+                    top: 40px;
+                    padding: 8px 16px;
+                }
+
+                #countdown {
+                    width: 120px;
+                    height: 120px;
+                    font-size: 70pt;
+                }
+
+                .button-82-front {
+                    width: 170px;
+                    height: 190px;
+                    font-size: 1rem;
+                    padding: 10px 20px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                #question {
+                    font-size: 1.5pc;
+                    top: 30px;
+                    padding: 6px 12px;
+                }
+
+                #countdown {
+                    width: 100px;
+                    height: 100px;
+                    font-size: 60pt;
+                }
+
+                .button-82-front {
+                    width: 150px;
+                    height: 170px;
+                    font-size: 0.9rem;
+                    padding: 8px 16px;
+                }
+
+            }
+
+            @media (max-width: 480px) {
+                #question {
+                   
+                    font-size: 30pt;
+                    top: 60px;
+                    padding: 11px 8px;
+                }
+
+                #countdown {
+                    width: 180px;
+                    height: 180px;
+                    font-size: 50pt;
+                }
+
+                .button-82-front {
+                    width: 450px;
+                    height: 450px;
+                    font-size: 0.75rem;
+                    padding: 6px 12px;
+                }
+
+
+            }
+
+            #gameArea {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100%;
+                position: relative;
+            }
+
+            #startGameText {
+                position: absolute;
+                bottom: calc(50% + 50px); /* Posiziona il testo poco sopra il pulsante */
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #ffffff;
+                font-size: 8vw;
+                text-shadow: 0 30px 5px rgba(0, 0, 0, 0.3);
+                z-index: 10;
+                animation: fadeInFromTop 1s ease-out forwards;
+                width: max-content;
+               
+            }
+
+            
+            
+
+            @keyframes fadeInFromTop {
+            0% {
+                opacity: 0;
+                transform:  translateX(-50%) translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            }
+          
+
+   
+    </style>
+</head>
+<body>
+    <audio id="myAudio" loop>
+        <source src="audio/music.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
+    <audio id="splatter">
+        <source src="audio/splatter.ogg" type="audio/ogg">
+    </audio>
+
+
+    <div id="gameArea">
+
+        <!--<a href="https://www.flaticon.com/free-icons/snake" title="snake icons">Snake icons created by Freepik - Flaticon</a> snake attr--> 
+         <!--<div id="startGameText">START GAME</div>--> 
+
+        <div id="startButton" class="button-82-pushable" role="button">
+            <div class="button-82-front text" id="startButton">
+            </div>  
+        </div>
+        
+
+
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="bounce" id="question">SELECT ... FROM PEOPLE;</div>
+        
+       
+        <canvas id="gameCanvas"></canvas>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+           
+            document.getElementById('myAudio').play();
+            this.style.display = 'none';
+            startCountdown();
+        
+        });
+
+        const coords = { x: 0, y: 0 };
+        const circles = document.querySelectorAll(".circle");
+
+        const colors = [
+            "#f2f2f2", "#d9d9d9", "#bfbfbf", "#a6a6a6",
+            "#8c8c8c", "#737373", "#595959", "#4c4c4c",
+            "#333333", "#262626", "#262626", "#262626",
+            "#262626"
+        ];
+
+        circles.forEach(function (circle, index) {
+            circle.x = 0;
+            circle.y = 0;
+            circle.style.backgroundColor = colors[index % colors.length];
+        });
+
+        window.addEventListener("mousemove", function (e) {
+            coords.x = e.clientX;
+            coords.y = e.clientY;
+        });
+
+        function animateCircles() {
+            let x = coords.x;
+            let y = coords.y;
+
+            circles.forEach(function (circle, index) {
+                circle.style.left = x - 12 + "px";
+                circle.style.top = y - 12 + "px";
+                circle.style.scale = (circles.length - index) / circles.length;
+                circle.x = x;
+                circle.y = y;
+
+                const nextCircle = circles[index + 1] || circles[0];
+                x += (nextCircle.x - x) * 0.3;
+                y += (nextCircle.y - y) * 0.3;
+            });
+
+            requestAnimationFrame(animateCircles);
+        }
+
+        animateCircles();
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const countdownElement = document.getElementById('countdown');
+        const questionElement = document.getElementById('question');
+        //const startGameText = document.getElementById('startGameText');
+        const canvasWidth = canvas.width = window.innerWidth;
+        const canvasHeight = canvas.height = window.innerHeight;
+
+        let fruits = [];
+        const fruitRadius = 45;  //tel 55 
+        const numFruits = 3; //NUM DI IMG frutti interi
+        const maxHeight = 600;
+        const gravity = 0.05;
+        const initialSpeed = 7.3;
+        const maxSpeed = 10;
+
+        const fruitImages = [
+            
+            'frutta/anguria.png',
+            'frutta/anguria-1.png',
+            'frutta/anguria-2.png',
+            'frutta/mela.png',
+            'frutta/mela-1.png',
+            'frutta/mela-2.png',
+            'frutta/fragola.png',
+            'frutta/fragola-1.png',
+            'frutta/fragola-2.png'
+        ];
+
+        const correctAnswer = "*";
+        const answers = ["*", ";", "All"];
+
+        function loadFruitImages(callback) {
+            let loadedImages = 0;
+            const images = [];
+            fruitImages.forEach((url, index) => {
+                const img = new Image();
+                img.src = url;
+                img.onload = () => {
+                    loadedImages++;
+                    images[index] = img;
+                    if (loadedImages === fruitImages.length) {
+                        callback(images);
+                    }
+                };
+            });
+        }
+
+        function getFixedPositions() {
+            const centerX = canvasWidth / 2;
+            const spacing = canvasWidth / 3;
+
+            return [
+                { x: centerX - spacing, y: canvasHeight + fruitRadius },
+                { x: centerX, y: canvasHeight + fruitRadius },
+                { x: centerX + spacing, y: canvasHeight + fruitRadius },
+            ];
+        }
+
+        function generateFruits(images) {
+            fruits = [];
+            const positions = getFixedPositions();
+
+            for (let i = 0; i < numFruits; i++) {
+                const position = positions[i];
+                const img = images[(i+i+i)];
+                const img_cut_1 = images[(i+i+i) + 1]
+                const img_cut_2 = images[(i+i+i) + 2]
+                const answer = answers[i];
+                fruits.push({
+                    x: position.x,
+                    y: position.y,
+                    img: img,
+                    img_cut_1: img_cut_1,
+                    img_cut_2: img_cut_2,
+                    speed: initialSpeed,
+                    isRising: true,
+                    stopped: false,
+                    //
+                    rotation: 1000,
+                    rotationSpeed: (Math.random() - 0.5) * 0.0425,
+                    answer: answer
+                });
+            }
+        }
+
+        function drawFruit(fruit) {
+            const { img, x, y, rotation, answer } = fruit;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.drawImage(img, -fruitRadius, -fruitRadius, fruitRadius * 2, fruitRadius * 2);
+            ctx.restore();
+
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 30pt Luckiest Guy';
+            ctx.textAlign = 'center';
+            ctx.fillText(answer, x, y + 7);
+        }
+
+        function drawFruitHalf(fruit) {
+           
+            const {img, x, y, rotation, isLeft } = fruit;
+            //console.log("fruit wid:" + JSON.stringify(img))
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            
+            if (isLeft) {
+                ctx.drawImage(img, 0, 0, img.width / 2, img.height, -fruitRadius, -fruitRadius, fruitRadius, fruitRadius * 2);
+            } else {
+                ctx.drawImage(img, img.width / 2, 0, img.width / 2, img.height, 0, -fruitRadius, fruitRadius, fruitRadius * 2);
+            }
+
+            ctx.restore();
+        }
+
+        function animateFruits() {
+            fruits.forEach(fruit => {
+                if (fruit.isLeft !== undefined) {
+                    fruit.x += fruit.speedX;
+                    fruit.y += fruit.speedY;
+                    fruit.rotation += fruit.rotationSpeed;
+                    fruit.speedY += gravity;
+                } else if (!fruit.stopped) {
+                    if (fruit.isRising) {
+                        fruit.y -= fruit.speed;
+                        fruit.speed -= gravity;
+
+                        if (fruit.y < canvasHeight - maxHeight) {
+                            fruit.isRising = false;
+                            fruit.speed = 0;
+                        }
+                    } else {
+                        fruit.y += fruit.speed;
+                        fruit.speed += gravity;
+                        if (fruit.speed > maxSpeed) {
+                            fruit.speed = maxSpeed;
+                        }
+                        if (fruit.y > canvasHeight - fruitRadius) {
+                            fruit.stopped = true;
+                        }
+                    }
+                    fruit.rotation += fruit.rotationSpeed;
+                }
+            });
+        }
+
+        function drawFruits() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            fruits.forEach(fruit => {
+                console.log("disegno" + fruit)
+                if (fruit.isLeft !== undefined) {
+                    drawFruitHalf(fruit);
+                } else {
+                    drawFruit(fruit);
+                }
+            });
+        }
+
+        let atLeasOneFruitIsCuted = false;
+        function checkFruitCollision(x, y) {
+            if(!atLeasOneFruitIsCuted){
+               
+                fruits.forEach((fruit, index) => {
+                const dx = x - fruit.x;
+                const dy = y - fruit.y;
+                if (dx * dx + dy * dy < fruitRadius * fruitRadius) {
+                    fruits.splice(index, 1);
+                    createFruitHalves(fruit);
+                }
+            });
+            }
+        }
+
+        function createFruitHalves(fruit) {
+
+            atLeasOneFruitIsCuted = true;
+            document.getElementById('splatter').play();
+            const halfWidth = fruitRadius;
+            const halfHeight = fruitRadius;
+
+            const leftHalf = {
+                x: fruit.x - halfWidth / 2,
+                y: fruit.y,
+                img: fruit.img_cut_2,
+                speedX: -3,
+                speedY: -3,
+                rotation: fruit.rotation,
+                rotationSpeed: fruit.rotationSpeed,
+                isLeft: true
+            };
+
+            const rightHalf = {
+                x: fruit.x + halfWidth / 2,
+                y: fruit.y,
+                img: fruit.img_cut_1,
+                speedX: 3,
+                speedY: -3,
+                rotation: fruit.rotation,
+                rotationSpeed: fruit.rotationSpeed,
+                isLeft: false
+            };
+            
+             /*for (var el of fruits) {
+                    if (el.img === fruit.img) {
+                        fruits.pop(fruit);
+                    }
+                }*/
+           
+            fruits.push(leftHalf);
+            fruits.push(rightHalf);
+            
+        }
+
+        canvas.addEventListener('mousemove', function (e) {
+            if (e.buttons === 1) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                checkFruitCollision(x, y);
+            }
+        });
+
+        canvas.addEventListener('touchmove', function (e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const y = e.touches[0].clientY - rect.top;
+            checkFruitCollision(x, y);
+        });
+
+        function startGame() {
+            loadFruitImages(function (images) {
+                generateFruits(images);
+                gameLoop();
+            });
+        }
+
+        function gameLoop() {
+            animateFruits();
+            drawFruits();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function startCountdown() {
+
+            questionElement.style.display = 'block';
+            countdownElement.style.display = 'flex';
+            //startGameText.style.display = 'none';
+            
+            
+            let countdownValue = 2;
+            countdownElement.textContent = countdownValue;
+            setTimeout(() => {
+                        const countdownInterval = setInterval(() => {
+                        countdownValue--;
+                        if (countdownValue > 0) {
+                            countdownElement.textContent = countdownValue;
+                        } else {
+                            clearInterval(countdownInterval);
+                            countdownElement.style.display = 'none';
+                            startGame();
+                        }
+                    }, 1000);
+            }, 2000);
+
+
+        }
+    </script>
+</body>
+</html>
+
+
+
