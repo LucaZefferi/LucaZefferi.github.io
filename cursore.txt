@@ -1,0 +1,115 @@
+      
+        .dot {
+
+            background: rgb(184, 184, 184);
+            position: absolute;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+ //Gestore cursore 
+
+        /*
+       const dots = [];
+       const cutstomCursor = {
+           x: 0,
+           y: 0,
+       };
+
+       for (let i = 0; i < 48; i++) {
+           const dot = document.createElement("div");
+           dot.className = "dot";
+           if (i >= 0 && i < 6) {
+               dot.style.borderRadius = '50%'
+               dot.style.width = '15px';
+               dot.style.height = '12px';
+           } else if (i >= 6 && i < 12) {
+               dot.style.width = '13px';
+               dot.style.height = '10px';
+           } else if (i >= 12 && i < 18) {
+               dot.style.width = '11px';
+               dot.style.height = '8px';
+           } else if (i >= 18 && i < 24) {
+               dot.style.width = '9px';
+               dot.style.height = '6px';
+           } else if (i >= 24 && i < 30) {
+               dot.style.width = '7px';
+               dot.style.height = '4px';
+           } else if (i >= 30 && i < 36) {
+               dot.style.width = '6px';
+               dot.style.height = '2px';
+           }
+           document.body.prepend(dot);
+           dots.push(dot);
+       }
+
+       document.addEventListener("mousedown", (e) => {
+           mousedown = true;
+           console.log("down")
+       });
+       document.addEventListener("mouseup", (e) => {
+
+           mousedown = false;
+       });
+
+       document.addEventListener("mousemove", (e) => {
+           let dots = document.getElementsByClassName('dot');
+           if (mousedown) {
+               cutstomCursor.x = e.clientX;
+               cutstomCursor.y = e.clientY;
+               setTimeout(() => {
+                   for (let i = 0; i < dots.length; i++) {
+                       dots[i].style.display = 'block';
+                   }
+               }, 5);
+           } else {
+               for (let i = 0; i < dots.length; i++) {
+                   dots[i].style.display = 'none';
+               }
+           }
+
+       });
+
+       /*document.addEventListener("touchmove", (e) => {
+           let dots = document.getElementsByClassName('dot');
+           cutstomCursor.x = e.touches[0].clientX;
+           cutstomCursor.y = e.touches[0].clientY;
+           setTimeout(() => {
+           for (let i = 0; i < dots.length; i++) {
+               dots[i].style.display = 'block';
+           }
+            }, 10);
+           
+       });
+
+       document.addEventListener('touchend', function(event) {
+           let dots = document.getElementsByClassName('dot');
+           for (let i = 0; i < dots.length; i++) {
+               dots[i].style.display = 'none';
+           }
+       });
+        */
+
+
+        /*
+      function draw() {
+          let x = cutstomCursor.x;
+          let y = cutstomCursor.y;
+
+          dots.forEach((dot, index) => {
+              const nextDot = dots[index + 1] || dots[0];
+
+              dot.style.left = x + "px";
+              dot.style.top = y + "px";
+
+              x += (nextDot.offsetLeft - dot.offsetLeft) * 0.5;
+              y += (nextDot.offsetTop - dot.offsetTop) * 0.5;
+          });
+      }
+
+      setInterval(draw, 0);
+      */
+
+        //Gestore cursore 
