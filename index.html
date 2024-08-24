@@ -331,6 +331,8 @@
         let mousedown = false
 
         //Gestore cursore 
+
+         /*
         const dots = [];
         const cutstomCursor = {
             x: 0,
@@ -411,6 +413,8 @@
         });
          */
 
+
+          /*
         function draw() {
             let x = cutstomCursor.x;
             let y = cutstomCursor.y;
@@ -427,6 +431,7 @@
         }
 
         setInterval(draw, 0);
+        */
 
         //Gestore cursore 
 
@@ -435,9 +440,9 @@
         const fruitRadius = 45;  //tel 55 
         const numFruits = 3; //NUM DI IMG frutti interi
         const maxHeight = 800;
-        const gravity = 0.2;
-        const initialSpeed = 17;
-        const maxSpeed = 25;
+        const gravity = 0.15;
+        const initialSpeed = 14;
+        const maxSpeed = 21;
 
         const fruitImages = [
             'frutta/anguria.png',
@@ -608,33 +613,37 @@
             });
         }
 
-        let atLeasOneFruitIsCuted = false;
+        let atLeasOneFruitIsCut = false;
         function checkFruitCollision(x, y) {
-            if (!atLeasOneFruitIsCuted) {
+            if (!atLeasOneFruitIsCut) {
                 fruits.forEach((fruit, index) => {
+                   
                     const dx = x - fruit.x;
                     const dy = y - fruit.y;
                     if (dx * dx + dy * dy < fruitRadius * fruitRadius) {
 
-                        fruits.splice(index, 1);
-                        atLeasOneFruitIsCuted = true;
-                        setTimeout(() => {
-                            createFruitHalves(fruit);
-                        }, 1);
+                        atLeasOneFruitIsCut = true;
+                        //setTimeout(() => {
+                            
+                            createFruitHalves(fruit, index);
+                        //}, 0.1);
+                        
                     }
 
+              
                 });
+                
             }
         }
 
-        function createFruitHalves(fruit) {
+        function createFruitHalves(fruit, index) {
 
             const leftImg = new Image();
             leftImg.src = fruit.left_cut_img;
             const rigthImg = new Image();
             rigthImg.src = fruit.rigth_cut_img;
 
-            document.getElementById('splatter').play();
+           
             const halfWidth = fruitRadius;
             const halfHeight = fruitRadius;
 
@@ -642,32 +651,32 @@
                 x: fruit.x + halfWidth / 55,
                 y: fruit.y,
                 img: leftImg,
-                speedX: -1,
-                speedY: -6,
+                speedX: -3,
+                speedY: -3,
                 rotation: fruit.rotation,
                 rotationSpeed: fruit.rotationSpeed,
                 isLeft: true
             };
-
+            fruits.push(leftHalf);
 
 
             const rightHalf = {
                 x: fruit.x + halfWidth / 55,
                 y: fruit.y,
                 img: rigthImg,
-                speedX: 1,
-                speedY: -6,
+                speedX: 3,
+                speedY: -3,
                 rotation: fruit.rotation,
                 rotationSpeed: fruit.rotationSpeed,
                 isLeft: false
             };
-
-
-
-
-            fruits.push(leftHalf);
             fruits.push(rightHalf);
 
+            setTimeout(() => {
+            fruits.splice(index, 1);
+             document.getElementById('splatter').play();
+            }, 135);
+        
 
         }
 
@@ -676,6 +685,7 @@
                 const rect = canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
+                
                 checkFruitCollision(x, y);
             }
         });
@@ -684,6 +694,7 @@
             const rect = canvas.getBoundingClientRect();
             const x = e.touches[0].clientX - rect.left;
             const y = e.touches[0].clientY - rect.top;
+            
             checkFruitCollision(x, y);
         });
 
