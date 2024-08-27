@@ -35,22 +35,23 @@
         }
 
         #question {
+            width: 100%;
             display: none;
             text-align: center;
             position: absolute;
-            min-width: 300px;
-            top: 50px;
+            max-width: 90vw; /* Assicurati che il contenitore non superi il 90% della larghezza della viewport */
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3.5pc;
+            font-size: 4.5vw; /* Usa unità relative come vw per adattarsi dinamicamente */
             color: #fff;
-            /*background-color: rgba(145, 79, 30, 0.9);
-                background-color: rgba(125,146,177, 0.9);*/
             padding: 10px 20px;
             border-radius: 20px;
             text-shadow: 0 30px 15px rgba(0, 0, 0, 0.5);
             z-index: 10;
             animation: fadeInFromTop 1s ease-out forwards;
+            box-sizing: border-box; /* Include padding e bordo nel calcolo della larghezza */
+            
         }
 
         #square {
@@ -86,16 +87,15 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 100pt;
+            font-size: 150pt;
             color: white;
             z-index: 10;
             opacity: 1;
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeInFromTop 1s ease-out forwards, zoomInOut 1s infinite;
         }
 
@@ -142,12 +142,6 @@
 
         }
 
-        @media (min-width: 768px) {
-            .button-82-front {
-                font-size: 1.25rem;
-                padding: 12px 42px;
-            }
-        }
 
         .button-82-pushable:hover {
             filter: brightness(110%);
@@ -178,22 +172,15 @@
 
             #question {
 
-                width: max-content;
-                font-size: 2.6pc;
+                font-size: 3.7pc;
                 top: 40px;
                 padding: 8px 16px;
             }
 
-            #countdown {
-                width: 120px;
-                height: 120px;
-                font-size: 70pt;
-            }
 
             .button-82-front {
-                width: 170px;
-                height: 190px;
-                font-size: 1rem;
+                
+               
                 padding: 10px 20px;
             }
         }
@@ -205,21 +192,14 @@
             }
 
             #question {
-                font-size: 2.0pc;
+                font-size: 3pc;
                 top: 30px;
                 padding: 6px 12px;
             }
 
-            #countdown {
-                width: 100px;
-                height: 100px;
-                font-size: 60pt;
-            }
 
             .button-82-front {
-                width: 150px;
-                height: 170px;
-                font-size: 0.9rem;
+        
                 padding: 8px 16px;
             }
 
@@ -235,7 +215,7 @@
 
             #question {
 
-                font-size: 30pt;
+                font-size: 25pt;
                 top: 30px;
                 padding: 11px 8px;
             }
@@ -246,16 +226,10 @@
                 height: 20px;
             }
 
-            #countdown {
-                width: 180px;
-                height: 180px;
-                font-size: 85pt;
-            }
 
             .button-82-front {
-                width: 450px;
-                height: 450px;
-                font-size: 0.75rem;
+                width: 500px;
+                height: 500px;
                 padding: 6px 12px;
             }
 
@@ -331,12 +305,70 @@
             display: none;
             color: #fff;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+
+        #messageContainer {
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        #messageContainer svg {
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
+
+        #successMessage {
+            display: block;
+            width: 260px;
+            height: 260px;
+            background: url(tick.svg);
+            background-repeat: no-repeat;
+            background-size:cover;
+            /* Lo SVG per il successo */
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
+
+        #errorMessage {
+            display: block;
+            background: url(wrong.svg);
+            width: 260px;
+            height: 260px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Lo SVG per l'errore */
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
     </style>
 </head>
 
 <body>
-    <audio id="myAudio" loop>
-        <source src="audio/music.mp3" type="audio/mpeg">
+    <audio id="musicAudio" loop>
+        <source src="audio/music-low.mp3" type="audio/mpeg">
         Il tuo browser non supporta l'audio HTML5.
     </audio>
     <audio id="throw">
@@ -346,10 +378,32 @@
     <audio id="splatter">
         <source src="audio/splatter.ogg" type="audio/ogg">
     </audio>
+    <audio id="successAns">
+        <source src="audio/success.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
+    <audio id="wrongAns">
+        <source src="audio/wrong.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
+    <audio id="countdownTimer">
+        <source src="audio/timer.wav" type="audio/wav">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
 
     <div id="blackScreen">
         <div id="textNextLevel">Next level!</div>
     </div>
+
+    <div id="messageContainer">
+        <div id="successMessage" style="display: none;">
+        
+        </div>
+        <div id="errorMessage" style="display: none;">
+       
+        </div>
+    </div>
+
     <div id="gameArea">
 
         <!--<a href="https://www.flaticon.com/free-icons/snake" title="snake icons">Snake icons created by Freepik - Flaticon</a> snake attr-->
@@ -361,7 +415,7 @@
         </div>
 
 
-        <div class="bounce" id="question">SELECT <div id="square"></div> FROM PEOPLE;</div>
+        <div id="question">SELECT <div id="square"></div> FROM PEOPLE;</div>
 
 
         <canvas id="gameCanvas"></canvas>
@@ -369,8 +423,15 @@
     </div>
 
     <script>
+
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+           
+        });
+
         document.getElementById('startButton').addEventListener('click', function () {
             this.style.display = 'none';
+            document.getElementById('musicAudio').play();
             startCountdown();
         });
 
@@ -386,7 +447,7 @@
 
 
         let fruits = [];
-        const fruitRadius = 45;
+        const fruitRadius = 65;
         const numFruits = 3;
         const maxHeight = 800;
         const gravity = 0.15;
@@ -413,25 +474,25 @@
 
         let questions = [
             {
-                "question": "Result of 2+2",
-                "answers": ["4", "5", "33"],
+                "question": "Anno inizio Prima Guerra Mondiale?",
+                "answers": ["1914", "1800", "2012"],
                 //"answers": ["d1-1", "d1-2", "d1-3"],
-                "rigthAnswer": "4",
+                "rigthAnswer": "1914",
                 "userAnswer": ""
 
             },
             {
-                "question": "Result of 5+5",
-                "answers": ["23", "10", "5"],
+                "question": "Autore del quadro “Guernica”?",
+                "answers": ["Baggio", "Picasso", "Van Gogh"],
                 //"answers": ["d2-1", "d2-2", "d2-3"],
-                "rigthAnswer": "10",
+                "rigthAnswer": "Picasso",
                 "userAnswer": ""
             },
             {
-                "question": "Result of 4+2",
-                "answers": ["6", "3", "9"],
+                "question": "Chi canta “Emozioni”?",
+                "answers": ["Modugno", "Vasco", "Battisti"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "6",
+                "rigthAnswer": "Battisti",
                 "userAnswer": ""
             }
         ];
@@ -469,7 +530,7 @@
             fruits = [];
             const position = { x: canvasWidth / 2, y: canvasHeight + fruitRadius };
             const currentQuestion = questions[currentQuestionIndex];
-            
+
             const img = images[currentFruitIndex];
             const answer = currentQuestion.answers[currentFruitIndex]; // Mostra una risposta per volta
 
@@ -490,16 +551,30 @@
 
         function drawFruit(fruit) {
             const { img, x, y, rotation, answer } = fruit;
+
+            // Imposta le proprietà dell'ombra
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 13;
+            ctx.shadowOffsetY = 20;
+
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(rotation);
             ctx.drawImage(img, -fruitRadius, -fruitRadius, fruitRadius * 2, fruitRadius * 2);
             ctx.restore();
 
+            // Ripristina le proprietà dell'ombra
+            ctx.shadowColor = 'transparent';  // Disabilita l'ombra per i testi
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
             ctx.font = 'bold 30pt Luckiest Guy';
             const textWidth = ctx.measureText(answer).width;
             const textHeight = 30;
 
+            // Sfondo del testo
             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
             ctx.fillRect(x - textWidth / 2 - 8, y - textHeight - 8, textWidth + 30, textHeight + 30);
 
@@ -510,10 +585,18 @@
             ctx.fillStyle = '#fff';
             ctx.textAlign = 'center';
             ctx.fillText(answer, x, y + 7);
+
         }
 
         function drawFruitHalf(fruit) {
             const { img, x, y, rotation } = fruit;
+
+
+            // Imposta le proprietà dell'ombra
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 13;
+            ctx.shadowOffsetY = 20;
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(rotation);
@@ -563,21 +646,42 @@
             });
         }
 
+        function showMessage(messageId, duration) {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (messageId === 'success') {
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            } else if (messageId === 'error') {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }, duration);
+        }
 
         function checkFruitCollision(x, y) {
-                console.log("collisione")
-                console.log("atLeastOneFruitIsCut: " + !atLeastOneFruitIsCut)
             if (!atLeastOneFruitIsCut) {
                 const fruit = fruits[0]; // C'è solo un frutto
                 const dx = x - fruit.x;
                 const dy = y - fruit.y;
                 if (dx * dx + dy * dy < fruitRadius * fruitRadius) {
                     atLeastOneFruitIsCut = true;
+                    const currentQuestion = questions[currentQuestionIndex];
+                    if (fruit.answer === currentQuestion.rigthAnswer) {
+                        
+                        showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
+                        document.getElementById('successAns').play();
+                    } else {
+                        showMessage('error', 1500); // Mostra la X animata per 1,5 secondi
+                        document.getElementById('wrongAns').play();
+                    }
                     createFruitHalves(fruit, 0);
-
-                    console.log("sono prima di next question")
-                    //proceedToNextQuestion(); // Vai subito alla prossima domanda
-                   
+                    // proceedToNextQuestion(); // Vai subito alla prossima domanda
                 }
             }
         }
@@ -638,7 +742,7 @@
         });
 
 
-         
+
         function startGame() {
             if (currentQuestionIndex > 0 && currentFruitIndex == 0) {
                 questionElement.style.display = 'none';
@@ -676,7 +780,7 @@
                 requestAnimationFrame(gameLoop);
             }
 
-           
+
 
         }
 
@@ -691,24 +795,25 @@
                 blackScreen.style.top = '-100%';
             }
         }
-        
+
         function proceedToNextQuestion() {
 
-            
+
             if (currentFruitIndex < numFruits - 1 && !atLeastOneFruitIsCut) {
                 currentFruitIndex++; // Passa al prossimo frutto (risposta)
-              
-                    //atLeastOneFruitIsCut = false;
-                    startGame(); // Lancia il prossimo frutto della stessa domanda
-                
+
+                //atLeastOneFruitIsCut = false;
+                startGame(); // Lancia il prossimo frutto della stessa domanda
+
             } else if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
                 currentFruitIndex = 0; // Resetta l'indice dei frutti
-               
-                    atLeastOneFruitIsCut = false;
-                    startGame(); // Passa alla prossima domanda
-                 
+
+                atLeastOneFruitIsCut = false;
+                startGame(); // Passa alla prossima domanda
+
             } else {
+                
                 triggerBlackScreen('on', true); // Mostra lo schermo nero alla fine di tutte le domande
             }
         }
@@ -718,6 +823,7 @@
                 countdownElement.style.display = 'flex';
                 let countdownValue = 3;
                 countdownElement.textContent = countdownValue;
+                //document.getElementById('countdownTimer').play();
                 const countdownInterval = setInterval(() => {
                     countdownValue--;
                     if (countdownValue > 0) {
