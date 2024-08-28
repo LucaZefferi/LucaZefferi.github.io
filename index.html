@@ -17,7 +17,7 @@
             background-color: #f0f0f0;
             cursor: block;
             font-family: 'Luckiest Guy', cursive, sans-serif;
-            background: url("wp-1.svg") fixed center;
+            background: url("img/wp-1.svg") fixed center;
             background-size: cover;
         }
 
@@ -39,19 +39,22 @@
             display: none;
             text-align: center;
             position: absolute;
-            max-width: 90vw; /* Assicurati che il contenitore non superi il 90% della larghezza della viewport */
+            max-width: 90vw;
+            /* Assicurati che il contenitore non superi il 90% della larghezza della viewport */
             top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2.5vw; /* Usa unità relative come vw per adattarsi dinamicamente */
+            font-size: 3.5vw;
+            /* Usa unità relative come vw per adattarsi dinamicamente */
             color: #fff;
             padding: 10px 20px;
             border-radius: 20px;
             text-shadow: 0 30px 15px rgba(0, 0, 0, 0.5);
             z-index: 10;
             animation: fadeInFromTop 1s ease-out forwards;
-            box-sizing: border-box; /* Include padding e bordo nel calcolo della larghezza */
-            
+            box-sizing: border-box;
+            /* Include padding e bordo nel calcolo della larghezza */
+
         }
 
         #square {
@@ -130,7 +133,7 @@
             font-size: 1.1rem;
             color: white;
             background-color: rgba(145, 79, 30, 0.9);
-            background: url(start-button-0.svg);
+            background: url("img/start-button-0.svg");
             background-repeat: no-repeat;
             background-size: cover;
             will-change: transform;
@@ -179,8 +182,8 @@
 
 
             .button-82-front {
-                
-               
+
+
                 padding: 10px 20px;
             }
         }
@@ -199,7 +202,7 @@
 
 
             .button-82-front {
-        
+
                 padding: 8px 16px;
             }
 
@@ -346,9 +349,9 @@
             display: block;
             width: 260px;
             height: 260px;
-            background: url(tick.svg);
+            background: url("img/tick.svg");
             background-repeat: no-repeat;
-            background-size:cover;
+            background-size: cover;
             /* Lo SVG per il successo */
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
@@ -356,7 +359,7 @@
 
         #errorMessage {
             display: block;
-            background: url(wrong.svg);
+            background: url("img/wrong.svg");
             width: 260px;
             height: 260px;
             background-repeat: no-repeat;
@@ -399,10 +402,10 @@
 
     <div id="messageContainer">
         <div id="successMessage" style="display: none;">
-        
+
         </div>
         <div id="errorMessage" style="display: none;">
-       
+
         </div>
     </div>
 
@@ -428,7 +431,7 @@
 
 
         document.addEventListener("DOMContentLoaded", (event) => {
-           
+
         });
 
         document.getElementById('startButton').addEventListener('click', function () {
@@ -458,46 +461,99 @@
 
         const fruitImages = [
             'frutta/anguria.png',
-            'frutta/mela.png',
+            'frutta/pesca.png',
             'frutta/fragola.png',
         ];
 
         const leftCutedfruitImages = [
             'frutta/anguria-1.png',
-            'frutta/mela-1.png',
+            'frutta/pesca-1.png',
             'frutta/fragola-1.png',
         ];
 
         const rightCutedfruitImages = [
             'frutta/anguria-2.png',
-            'frutta/mela-2.png',
+            'frutta/pesca-2.png',
             'frutta/fragola-2.png',
         ];
 
         let questions = [
+     
             {
-                "question": "Comandi usati per modificare o eliminare gli oggetti in un DB",
-                "answers": ["DDL", "DML", "DCL"],
+                "question": "Comando per creare una tabella in SQL?",
+                "answers": ["DELETE", "INT", "CREATE"],
+                //"answers": ["d2-1", "d2-2", "d2-3"],
+                "rigthAnswer": "CREATE",
+                "userAnswer": ""
+            },
+            {
+                "question": "Clausola per rimuovere duplicati in SQL?",
+                "answers": ["SELECT", "DISTINCT", "HAVING"],
                 //"answers": ["d1-1", "d1-2", "d1-3"],
-                "rigthAnswer": "DDL",
+                "rigthAnswer": "DISTINCT",
                 "userAnswer": ""
 
             },
             {
-                "question": "Individua univocamente un record in una tabella.",
-                "answers": ["KL", "FK", "PK"],
-                //"answers": ["d2-1", "d2-2", "d2-3"],
-                "rigthAnswer": "PK",
+                "question": "Parola chiave per classe non ereditabile in JAVA?",
+                "answers": ["VOID", "STATIC", "FINAL"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "FINAL",
                 "userAnswer": ""
             },
             {
-                "question": "SELECT * FROM USER ▢ USER_NAME = 'Luca' ",
-                "answers": ["SELECT", "WHERE", "JOIN"],
+                "question": "Simbolo per accedere ai metodi di un obj in JAVA?",
+                "answers": [".", "?", "+"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "WHERE",
+                "rigthAnswer": ".",
+                "userAnswer": ""
+            },
+            {
+                "question": "Operatore di uguaglianza stretta in JS?",
+                "answers": ["===", "eq", "!"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "===",
+                "userAnswer": ""
+            },
+            {
+                "question": "Parola chiave per dichiarare una variabile in JS?",
+                "answers": ["int", "dec", "var"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "var",
+                "userAnswer": ""
+            },
+            {
+                "question": "Tag per collegamento ipertestuale in HTML?",
+                "answers": ["<a>", "<h1>", "<li>"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "<a>",
+                "userAnswer": ""
+            },
+            {
+                "question": "Attributo per URL immagine in HTML?",
+                "answers": ["dml", "src", "link"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "src",
+                "userAnswer": ""
+            },
+            {
+                "question": "Parola chiave per costante in C++?",
+                "answers": ["unique", "point", "const"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "const",
+                "userAnswer": ""
+            },
+            {
+                "question": "Simbolo per referenza in C++?",
+                "answers": ["REF", "&", "DEC"],
+                //"answers": ["d3-1", "d3-2", "d3-3"],
+                "rigthAnswer": "&",
                 "userAnswer": ""
             }
         ];
+
+
+            
 
         let currentQuestionIndex = 0;
 
@@ -572,17 +628,17 @@
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 0;
 
-            ctx.font = 'bold 30pt Luckiest Guy';
+            ctx.font = '30pt Luckiest Guy';
             const textWidth = ctx.measureText(answer).width;
             const textHeight = 30;
 
             // Sfondo del testo
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-            ctx.fillRect(x - textWidth / 2 - 8, y - textHeight - 8, textWidth + 30, textHeight + 30);
+            //ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+             // ctx.fillRect(x - textWidth / 2 - 8, y - textHeight - 8, textWidth + 30, textHeight + 30);
 
-            ctx.strokeStyle = 'white';
-            ctx.lineWidth = 3;
-            ctx.strokeRect(x - textWidth / 2 - 8, y - textHeight - 8, textWidth + 30, textHeight + 30);
+            //ctx.strokeStyle = 'white';
+            //ctx.lineWidth = 3;
+           // ctx.strokeRect(x - textWidth / 2 - 8, y - textHeight - 8, textWidth + 30, textHeight + 30);
 
             ctx.fillStyle = '#fff';
             ctx.textAlign = 'center';
@@ -675,7 +731,7 @@
                     atLeastOneFruitIsCut = true;
                     const currentQuestion = questions[currentQuestionIndex];
                     if (fruit.answer === currentQuestion.rigthAnswer) {
-                        
+
                         showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
                         document.getElementById('successAns').play();
                     } else {
@@ -748,22 +804,41 @@
         function startGame() {
             if (currentQuestionIndex > 0 && currentFruitIndex == 0) {
                 questionElement.style.display = 'none';
+
+
                 setTimeout(() => {
                     questionElement.style.display = 'block';
-                }, 1000);
+                }, 2000);
             } else {
-                questionElement.style.display = 'block';
+
+                setTimeout(() => {
+
+                    questionElement.style.display = 'block';
+                }, 2000);
+
             }
 
             questionElement.textContent = questions[currentQuestionIndex].question;
 
-            setTimeout(() => {
-                loadFruitImages(function (images) {
-                    generateFruit(images); // Genera un frutto per volta
-                    gameLoop();
-                    document.getElementById('throw').play();
-                });
-            }, 5000);
+
+            if (currentFruitIndex == 0) {
+                setTimeout(() => {
+                    loadFruitImages(function (images) {
+                        generateFruit(images); // Genera un frutto per volta
+                        gameLoop();
+                        document.getElementById('throw').play();
+                    });
+                }, 8000);
+            } else {
+                setTimeout(() => {
+                    loadFruitImages(function (images) {
+                        generateFruit(images); // Genera un frutto per volta
+                        gameLoop();
+                        document.getElementById('throw').play();
+                    });
+                }, 3000);
+            }
+
         }
 
 
@@ -815,7 +890,7 @@
                 startGame(); // Passa alla prossima domanda
 
             } else {
-                
+
                 triggerBlackScreen('on', true); // Mostra lo schermo nero alla fine di tutte le domande
             }
         }
