@@ -963,12 +963,12 @@
 
        });
 
-       document.addEventListener("touchmove", (e) => {
+       /*document.addEventListener("touchmove", (e) => {
            //let dots = document.getElementsByClassName('dot');
 
            //setTimeout(() => {
            //for (let i = 0; i < dots.length; i++) {
-           console.log("telllll")
+           
             containerCursor.style.display = 'block';
            //
             //}, 10);
@@ -981,7 +981,7 @@
             containerCursor.style.display = 'none';
            //}
        });
-        
+        */
 
         
 
@@ -1112,19 +1112,6 @@ window.addEventListener(
   false
 );
 
-window.addEventListener(
-  "touchmove",
-  function (e) {
-    anime.set(sparks[sparksIndex].els, {
-      left: e.touches[0].clientX,
-      top: e.touches[0].clientY
-    });
-    sparks[sparksIndex].anime.restart();
-    sparksIndex++;
-    if (sparksIndex == sparks.length) sparksIndex = 0;
-  },
-  false
-);
 
     </script>
 </body>
