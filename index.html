@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
+        }
+
+
+        .spaceship {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: absolute;
+            display: flex;
+            bottom: 30px;
+            background: url(img/nave-1.png);
+            background-size: contain;
+            overflow: hidden;
+            align-items: center;
+            z-index: 1; /* Assicurati che la navicella sia sopra la fiamma */
+        }
+
+.flame {
+    position: absolute;
+    bottom: 15px;
+    left: 51%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 20px solid rgba(255, 0, 0, 0.8);
+    border-bottom: 20px solid transparent;
+    transform: translateX(-50%) rotate(0deg);
+    animation: flicker 0.2s infinite;
+    z-index: -1; /* Posiziona la fiamma dietro la navicella */
+}
+
+.flame:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 15px solid rgba(255, 165, 0, 0.8);
+    border-bottom: 15px solid transparent;
+    transform: translateX(-50%) rotate(0deg);
+}
+
+.flame:after {
+    content: '';
+    position: absolute;
+    top: -21px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 10px solid rgba(255, 255, 0, 0.8);
+    border-bottom: 10px solid transparent;
+    transform: translateX(-50%) rotate(0deg);
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1);
+    }
+    20% {
+        opacity: 0.8;
+        transform: translateX(-50%) scaleY(1.1);
+    }
+    40% {
+        opacity: 0.6;
+        transform: translateX(-50%) scaleY(1);
+    }
+    60% {
+        opacity: 0.7;
+        transform: translateX(-50%) scaleY(0.9);
+    }
+    80% {
+        opacity: 0.5;
+        transform: translateX(-50%) scaleY(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1);
+    }
+}
+
+        .planet {
+            width: 180px;
+            height: 180px;
+            background-color: transparent;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 70px;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        .planet1 {
+            left: 15%;
+            background: url(img/p1.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .planet2 {
+            left: 45%;
+            background: url(img/p2.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .planet3 {
+            left: 75%;
+            background: url(img/p3.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .bullet {
+            width: 4px;
+            height: 20px;
+            background-color: rgba(49, 243, 10, 0.982);
+            position: absolute;
+            bottom: 70px;
+            background-color: rgba(49, 243, 10, 0.982);
+            border-radius: 2px;
+        }
+
+        /* Effetto laser */
+        .bullet:before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            width: 2px;
+            height: 15px;
+            background-color: rgba(49, 243, 10, 0.982);
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="miCanvas"></canvas>
+    <div class="spaceship" id="player">
+        <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
+    </div>
+    <div class="planet planet1"></div>
+    <div class="planet planet2"></div>
+    <div class="planet planet3"></div>
+
+    <script>
+        // Configurazione del canvas per lo sfondo
+        const canvas = document.getElementById("miCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Creazione delle stelle per il background
+        const numStars = 2000;
+        const stars = [];
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width - centerX,
+                y: Math.random() * canvas.height - centerY,
+                z: Math.random() * canvas.width
+            });
+        }
+
+        function drawBackground() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "white";
+            for (let i = 0; i < stars.length; i++) {
+                const star = stars[i];
+                const x = centerX + (star.x / star.z) * canvas.width;
+                const y = centerY + (star.y / star.z) * canvas.height;
+
+                const size = 1.5 * (1 - star.z / canvas.width);
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2, false);
+                ctx.fill();
+
+                star.z -= 2;
+
+                if (star.z <= 0) {
+                    star.z = canvas.width;
+                    star.x = Math.random() * canvas.width - centerX;
+                    star.y = Math.random() * canvas.height - centerY;
+                }
+            }
+
+            requestAnimationFrame(drawBackground);
+        }
+
+        // Iniziare il disegno del background
+        drawBackground();
+
+        // Configurazione della nave spaziale
+        const spaceship = document.getElementById('player');
+        let playerX = canvas.width / 2 - 100;
+        let playerSpeed = 10;
+
+        // Funzione per disegnare la nave
+        function drawPlayer() {
+            spaceship.style.left = playerX + 'px';
+        }
+
+        // Controllo del movimento della nave
+        let keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                keys[e.key] = true;
+            }
+        });
+
+        document.addEventListener('keyup', function (e) {
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                keys[e.key] = false;
+            }
+        });
+
+        function movePlayer() {
+            if (keys.ArrowLeft && playerX > 0) {
+                playerX -= playerSpeed;
+            }
+            if (keys.ArrowRight && playerX < canvas.width - spaceship.offsetWidth) {
+                playerX += playerSpeed;
+            }
+            drawPlayer();
+            requestAnimationFrame(movePlayer);
+        }
+
+        // Iniziare il movimento della nave
+        movePlayer();
+
+        // Adattare il canvas quando la finestra viene ridimensionata
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Mostrare pianeti con effetto fade-in
+        const planets = document.querySelectorAll('.planet');
+        planets.forEach(planet => {
+            setTimeout(() => {
+                planet.style.opacity = 1;
+            }, 500);
+        });
+
+        // Creazione e gestione dei proiettili
+        let bullets = [];
+
+        document.addEventListener('keydown', function (e) {
+            if (e.code === 'Space') {
+                createBullet();
+            }
+        });
+
+        function createBullet() {
+            let bullet = document.createElement('div');
+            bullet.classList.add('bullet');
+            bullet.style.left = playerX + spaceship.offsetWidth / 2 - 2.5 + 'px';
+            bullet.style.bottom = '70px';
+            document.body.appendChild(bullet);
+            bullets.push(bullet);
+        }
+
+        function moveBullets() {
+            bullets.forEach((bullet, index) => {
+                bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
+
+                if (parseInt(bullet.style.bottom) > window.innerHeight) {
+                    bullet.remove();
+                    bullets.splice(index, 1);
+                }
+
+                planets.forEach((planet, planetIndex) => {
+                    if (isCollide(bullet, planet)) {
+                        bullet.remove();
+                        bullets.splice(index, 1);
+                        planet.remove();
+                        planets[planetIndex] = null;
+                    }
+                });
+            });
+
+            requestAnimationFrame(moveBullets);
+        }
+
+        function isCollide(a, b) {
+            const aRect = a.getBoundingClientRect();
+            const bRect = b.getBoundingClientRect();
+
+            return !(
+                aRect.top > bRect.bottom ||
+                aRect.bottom < bRect.top ||
+                aRect.right < bRect.left ||
+                aRect.left > bRect.right
+            );
+        }
+
+        // Iniziare il movimento dei proiettili
+        moveBullets();
+    </script>
+</body>
+
+</html>
