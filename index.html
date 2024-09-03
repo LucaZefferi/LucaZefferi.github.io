@@ -6,32 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Invaders</title>
     <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
         body {
             margin: 0;
             overflow: hidden;
             background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
+            font-family: 'Luckiest Guy', cursive, sans-serif;
         }
 
 
         .spaceship {
-            width: 150px;
-            height: 150px;
+            width: 60px;
+            height: 130px;
             background-color: white;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             position: absolute;
-            display: flex;
+            display: none;
             bottom: 30px;
-            background: url(img/nave-1.png);
+            background: url(img/razzo-1.png);
+            background-repeat: no-repeat;
             background-size: contain;
             overflow: hidden;
             align-items: center;
             z-index: 1; /* Assicurati che la navicella sia sopra la fiamma */
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
         }
 
 .flame {
     position: absolute;
-    bottom: 15px;
-    left: 51%;
+    bottom: 0px;
+    left: 54%;
     width: 0;
     height: 0;
     border-left: 10px solid transparent;
@@ -99,23 +104,23 @@
 }
 
         .planet {
-            width: 180px;
-            height: 180px;
+            width: 140px;
+            height: 140px;
             background-color: transparent;
             border-radius: 50%;
-
-            position: absolute;
-            top: 70px;
             opacity: 0;
+            margin-top:150px;
             transition: opacity 2s ease-in;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
         }
+
 
         @keyframes float {
 
             0%,
             100% {
-                transform: translateY(0);
+                transform:  translateY(0);
             }
 
             50% {
@@ -123,22 +128,24 @@
             }
         }
 
+    
+
         .planet1 {
-            left: 15%;
+            
             background: url(img/p1.svg);
             background-size: cover;
             background-repeat: no-repeat;
         }
 
         .planet2 {
-            left: 45%;
+            
             background: url(img/p2.svg);
             background-size: cover;
             background-repeat: no-repeat;
         }
 
         .planet3 {
-            left: 75%;
+            
             background: url(img/p3.svg);
             background-size: cover;
             background-repeat: no-repeat;
@@ -165,179 +172,485 @@
             background-color: rgba(49, 243, 10, 0.982);
             transform: translateX(-50%);
         }
+
+        #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
+    z-index: -1;
+  }
+  
+  .star {
+    position: absolute;
+    background-color: #fff;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+  }
+  
+  .star:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: starTwinkle 2s infinite;
+  }
+  
+  .shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background-color: #fff;
+    opacity: 1;
+    z-index: 1;
+    transform: rotate(45deg);
+    animation: shootingStarAnimation 0.5s linear forwards;
+  }
+  
+  @keyframes starTwinkle {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes shootingStarAnimation {
+    0% {
+      opacity: 1;
+      transform: translateX(-200px) translateY(-200px) rotate(70deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(200px) translateY(-300px) rotate(70deg);
+    }
+  }
+
+
+
+
+  #countdown {
+    position: fixed; /* Cambia a fixed per essere sempre centrato rispetto alla finestra */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Sposta l'elemento indietro di metà della sua larghezza e altezza */
+    display: flex; /* Usa flex per centrare il testo al suo interno */
+    align-items: center; /* Centra il testo verticalmente */
+    justify-content: center; /* Centra il testo orizzontalmente */
+    font-size: 150pt; /* Dimensione del testo del countdown */
+    color: white; /* Colore del testo del countdown */
+    z-index: 10; /* Assicura che il countdown sia sopra altri elementi */
+    opacity: 1; /* Imposta l'opacità iniziale */
+    filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
+    animation: fadeInFromTop 1s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
+}
+
+
+
+
+  /* Randomized twinkle delays */
+.star:nth-child(1):before {
+    animation-delay: 0.8s;
+  }
+  
+  .star:nth-child(2):before {
+    animation-delay: 1.2s;
+  }
+  
+  .star:nth-child(3):before {
+    animation-delay: 0.9s;
+  }
+  
+  .star:nth-child(4):before {
+    animation-delay: 1.4s;
+  }
+  
+  .star:nth-child(5):before {
+    animation-delay: 1.1s;
+  }
+  
+  .star:nth-child(6):before {
+    animation-delay: 0.7s;
+  }
+  
+  /* Add more star:nth-child(n):before rules for additional stars */
+  .star:nth-child(7):before {
+    animation-delay: 1.3s;
+  }
+  
+  .star:nth-child(8):before {
+    animation-delay: 0.6s;
+  }
+  
+  .star:nth-child(9):before {
+    animation-delay: 1.5s;
+  }
+  
+  .star:nth-child(10):before {
+    animation-delay: 0.5s;
+  }
+  
+  /* Continue adding star:nth-child(n):before rules for more delays */
+  .star:nth-child(15):before {
+    animation-delay: 0.8s;
+  }
+  
+  .star:nth-child(16):before {
+    animation-delay: 1.2s;
+  }
+  
+  .star:nth-child(17):before {
+    animation-delay: 0.9s;
+  }
+  
+  .star:nth-child(18):before {
+    animation-delay: 1.4s;
+  }
+  
+  .star:nth-child(19):before {
+    animation-delay: 1.1s;
+  }
+  
+  .star:nth-child(20):before {
+    animation-delay: 0.7s;
+  }
+  
+  /* Add more star:nth-child(n):before rules for additional stars */
+  .star:nth-child(11):before {
+    animation-delay: 1.3s;
+  }
+  
+  .star:nth-child(12):before {
+    animation-delay: 0.6s;
+  }
+  
+  .star:nth-child(13):before {
+    animation-delay: 1.5s;
+  }
+  
+  .star:nth-child(14):before {
+    animation-delay: 0.5s;
+  }
+
+
+
+
+
+
+.button-82-pushable {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            transition: filter 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            z-index: 9999;
+            /*animation: float 3s ease-in-out infinite;*/
+         
+        }
+
+
+
+        .button-82-front {
+            width: 600px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            padding: 12px 27px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            color: white;
+            background-color: rgba(145, 79, 30, 0.9);
+            background: url("img/start-game.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            will-change: transform;
+            transform: translateY(-4px);
+            font-family: 'Luckiest Guy', cursive, sans-serif;
+            transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
+
+
+        }
+
+
+        .button-82-pushable:hover {
+            filter: brightness(110%);
+            -webkit-filter: brightness(110%);
+        }
+
+        .button-82-pushable:hover .button-82-front {
+            transform: translateY(-6px);
+            transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+        }
+
+        .button-82-pushable:active .button-82-front {
+            transform: translateY(-2px);
+            transition: transform 34ms;
+        }
+
+        .button-82-pushable:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        @keyframes fadeInFromTop {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes zoomInOut {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
     </style>
 </head>
 
 <body>
+
+    
+    <div id="stars">
+
+    
+        <div class="button-82-pushable" role="button">
+            <div class="button-82-front text" id="startButton">
+            </div>
+        </div>
+
+
     <canvas id="miCanvas"></canvas>
-    <div class="spaceship" id="player">
-        <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
+    <div id="countdown"></div>
+
     </div>
-    <div class="planet planet1"></div>
-    <div class="planet planet2"></div>
-    <div class="planet planet3"></div>
+    <div class="spaceship" id="player">
+       <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+        <div class="planet planet1"></div>
+        <div class="planet planet2"></div>
+        <div class="planet planet3"></div>
+    </div>
+
 
     <script>
-        // Configurazione del canvas per lo sfondo
-        const canvas = document.getElementById("miCanvas");
-        const ctx = canvas.getContext("2d");
+const canvas = document.getElementById("miCanvas");
+const ctx = canvas.getContext("2d");
+var isStarted = false;
+var canShoot = false;
+const countdownElement = document.getElementById('countdown');
+var currentQuestionIndex = 0;
+const spaceship = document.getElementById('player');
 
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const starCount = 45;
+    const shootingStarInterval = 800;
+    const startButton = document.getElementById('startButton');
+    generateStars();
+   
+
+    startButton.addEventListener('click', startGame);
+
+    function startGame() {
+        // Nascondi lo schermo iniziale
+        startButton.style.display = "none";
+        isStarted = true;
+        startCountdown();
+        
+        // Abilita la possibilità di sparare dopo 5 secondi
+        setTimeout(() => {
+            canShoot = true;
+        }, 5000);
+
+        // Avvia l'animazione delle stelle e il movimento della navicella
+        movePlayer();
+        moveBullets();
+    }
+
+
+    function startCountdown() {
+    // Mostra il countdown e inizializza il valore
+    countdownElement.style.display = 'flex';
+    let countdownValue = 3;
+    countdownElement.textContent = countdownValue;
+    
+    // Aggiorna il countdown ogni secondo
+    const countdownInterval = setInterval(() => {
+        countdownValue--;
+        countdownElement.textContent = countdownValue > 0 ? countdownValue : '';
+        if (countdownValue <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = 'none'; // Nasconde il countdown dopo il completamento
+        }
+    }, 1000);
+
+    // Mostra i pianeti e la navicella dopo 5 secondi
+    const showElementsAfterDelay = () => {
+        const planets = document.querySelectorAll('.planet');
+        planets.forEach(planet => planet.style.opacity = 1);
+        spaceship.style.display = 'flex';
+    };
+
+    setTimeout(showElementsAfterDelay, 4100);
+    }
+
+
+
+    function createStar() {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        document.getElementById("stars").appendChild(star);
+    }
+
+    function createShootingStar() {
+        const shootingStar = document.createElement("div");
+        shootingStar.className = "shooting-star";
+        shootingStar.style.top = `${Math.random() * 100}%`;
+        shootingStar.style.left = `${Math.random() * 100}%`;
+        document.body.appendChild(shootingStar);
+        setTimeout(() => {
+            document.body.removeChild(shootingStar);
+        }, 3000);
+    }
+
+    function generateStars() {
+        for (let i = 0; i < starCount; i++) {
+            createStar();
+        }
+    }
+
+    function randomizeShootingStarInterval() {
+        const interval = Math.random() * shootingStarInterval;
+        setTimeout(function () {
+            createShootingStar();
+            randomizeShootingStarInterval();
+        }, interval);
+    }
+    randomizeShootingStarInterval();
+    generateStars();
+
+    
+
+    let playerX = canvas.width / 2 - 100;
+
+    function drawPlayer() {
+        spaceship.style.left = playerX + 'px';
+    }
+
+    // Modifica per il movimento del mouse
+    document.addEventListener('mousemove', function (e) {
+        playerX = e.clientX - spaceship.offsetWidth / 2;
+        drawPlayer();
+    });
+
+    function movePlayer() {
+        drawPlayer();
+        requestAnimationFrame(movePlayer);
+    }
+
+    window.addEventListener("resize", () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+    });
 
-        // Creazione delle stelle per il background
-        const numStars = 700;
-        const stars = [];
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+    let bullets = [];
 
-        for (let i = 0; i < numStars; i++) {
-            stars.push({
-                x: Math.random() * canvas.width - centerX,
-                y: Math.random() * canvas.height - centerY,
-                z: Math.random() * canvas.width
-            });
+    document.addEventListener('click', function (e) {
+        // Permette di sparare solo se il gioco è iniziato e sono passati 5 secondi
+        if (isStarted && canShoot) {
+            createBullet(); 
         }
+    });
 
-        function drawBackground() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function createBullet() {
+        let bullet = document.createElement('div');
+        bullet.classList.add('bullet');
+        bullet.style.left = playerX + spaceship.offsetWidth / 2 - 2.5 + 'px';
+        bullet.style.bottom = '70px';
+        document.body.appendChild(bullet);
+        bullets.push(bullet);
+    }
 
-            ctx.fillStyle = "white";
-            for (let i = 0; i < stars.length; i++) {
-                const star = stars[i];
-                const x = centerX + (star.x / star.z) * canvas.width;
-                const y = centerY + (star.y / star.z) * canvas.height;
+    function moveBullets() {
+        bullets.forEach((bullet, index) => {
+            bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
 
-                const size = 1.5 * (1 - star.z / canvas.width);
-                ctx.beginPath();
-                ctx.arc(x, y, size, 0, Math.PI * 2, false);
-                ctx.fill();
-
-                star.z -= 2;
-
-                if (star.z <= 0) {
-                    star.z = canvas.width;
-                    star.x = Math.random() * canvas.width - centerX;
-                    star.y = Math.random() * canvas.height - centerY;
-                }
+            if (parseInt(bullet.style.bottom) > window.innerHeight) {
+                bullet.remove();
+                bullets.splice(index, 1);
             }
 
-            requestAnimationFrame(drawBackground);
-        }
-
-        // Iniziare il disegno del background
-        drawBackground();
-
-        // Configurazione della nave spaziale
-        const spaceship = document.getElementById('player');
-        let playerX = canvas.width / 2 - 100;
-        let playerSpeed = 10;
-
-        // Funzione per disegnare la nave
-        function drawPlayer() {
-            spaceship.style.left = playerX + 'px';
-        }
-
-        // Controllo del movimento della nave
-        let keys = {
-            ArrowLeft: false,
-            ArrowRight: false,
-        };
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-                keys[e.key] = true;
-            }
-        });
-
-        document.addEventListener('keyup', function (e) {
-            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-                keys[e.key] = false;
-            }
-        });
-
-        function movePlayer() {
-            if (keys.ArrowLeft && playerX > 0) {
-                playerX -= playerSpeed;
-            }
-            if (keys.ArrowRight && playerX < canvas.width - spaceship.offsetWidth) {
-                playerX += playerSpeed;
-            }
-            drawPlayer();
-            requestAnimationFrame(movePlayer);
-        }
-
-        // Iniziare il movimento della nave
-        movePlayer();
-
-        // Adattare il canvas quando la finestra viene ridimensionata
-        window.addEventListener("resize", () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Mostrare pianeti con effetto fade-in
-        const planets = document.querySelectorAll('.planet');
-        planets.forEach(planet => {
-            setTimeout(() => {
-                planet.style.opacity = 1;
-            }, 500);
-        });
-
-        // Creazione e gestione dei proiettili
-        let bullets = [];
-
-        document.addEventListener('keydown', function (e) {
-            if (e.code === 'Space') {
-                createBullet();
-            }
-        });
-
-        function createBullet() {
-            let bullet = document.createElement('div');
-            bullet.classList.add('bullet');
-            bullet.style.left = playerX + spaceship.offsetWidth / 2 - 2.5 + 'px';
-            bullet.style.bottom = '70px';
-            document.body.appendChild(bullet);
-            bullets.push(bullet);
-        }
-
-        function moveBullets() {
-            bullets.forEach((bullet, index) => {
-                bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
-
-                if (parseInt(bullet.style.bottom) > window.innerHeight) {
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach((planet, planetIndex) => {
+                if (isCollide(bullet, planet)) {
                     bullet.remove();
                     bullets.splice(index, 1);
+                    planet.style.opacity = 0;
                 }
-
-                planets.forEach((planet, planetIndex) => {
-                    if (isCollide(bullet, planet)) {
-                        bullet.remove();
-                        bullets.splice(index, 1);
-                        planet.remove();
-                        planets[planetIndex] = null;
-                    }
-                });
             });
+        });
 
-            requestAnimationFrame(moveBullets);
-        }
+        requestAnimationFrame(moveBullets);
+    }
 
-        function isCollide(a, b) {
-            const aRect = a.getBoundingClientRect();
-            const bRect = b.getBoundingClientRect();
+    function isCollide(a, b) {
+        const aRect = a.getBoundingClientRect();
+        const bRect = b.getBoundingClientRect();
 
-            return !(
-                aRect.top > bRect.bottom ||
-                aRect.bottom < bRect.top ||
-                aRect.right < bRect.left ||
-                aRect.left > bRect.right
-            );
-        }
+        return !(
+            aRect.top > bRect.bottom ||
+            aRect.bottom < bRect.top ||
+            aRect.right < bRect.left ||
+            aRect.left > bRect.right
+        );
+    }
+});
 
-        // Iniziare il movimento dei proiettili
-        moveBullets();
     </script>
 </body>
 
