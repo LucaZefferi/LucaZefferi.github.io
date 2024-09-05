@@ -14,6 +14,10 @@
             overflow: hidden;
             background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
             font-family: 'Luckiest Guy', cursive, sans-serif;
+            user-select: none; /* Impedisce la selezione del testo */
+            -webkit-user-select: none; /* Chrome/Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
         }
 
 
@@ -108,14 +112,19 @@
 }
 
         .planet {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: #fff;
             width: 140px;
             height: 140px;
             background-color: transparent;
             border-radius: 50%;
             opacity: 0;
             margin-top:150px;
-            transition: opacity 2s ease-in;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3.2s ease-in-out infinite;
+            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
             filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
         }
 
@@ -156,26 +165,17 @@
         }
 
         .bullet {
-            width: 4px;
-            height: 20px;
-            background-color: rgba(49, 243, 10, 0.982);
+            width: 9px;
+            height: 35px;
+            background: #2afe00fa;
             position: absolute;
             bottom: 70px;
-            background-color: rgba(49, 243, 10, 0.982);
-            border-radius: 2px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(49, 243, 10, 0.7);
         }
 
-        /* Effetto laser */
-        .bullet:before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            width: 2px;
-            height: 15px;
-            background-color: rgba(49, 243, 10, 0.982);
-            transform: translateX(-50%);
-        }
+
+
 
         #stars {
     position: fixed;
@@ -447,21 +447,116 @@
             }
         }
 
+        .explosion {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: url('img/explosion.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            animation: explode 0.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        .planets-container {
+            display: flex;
+            justify-content: space-evenly; /* Distribuisce lo spazio uniformemente */
+            width: 100%; /* Assicura che il contenitore prenda tutto lo spazio disponibile */
+            position: absolute;
+            top: 0; /* Puoi regolare la posizione in base alle tue esigenze */
+            left: 0;
+            right: 0;
+            
+        }
+        #question-container {
+            position: absolute;
+            animation: fadeInFromTop 2s ease-out forwards;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24pt;
+            text-align: center;
+            z-index: 999;
+            display: none;
+            font-family: 'Luckiest Guy', cursive, sans-serif;
+        }
+
+
+        
+        #messageContainer {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        }
+
+        #messageContainer svg {
+        animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
+
+        #successMessage {
+            display: block;
+            width: 260px;
+            height: 260px;
+            background: url("img/tick.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Lo SVG per il successo */
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
+
+        #errorMessage {
+            display: block;
+            background: url("img/wrong.svg");
+            width: 260px;
+            height: 260px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Lo SVG per l'errore */
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+        }
     </style>
 </head>
 
 <body>
 
-    
+ 
     <div id="stars">
 
-    
+
         <div class="button-82-pushable" role="button">
             <div class="button-82-front text" id="startButton">
             </div>
         </div>
 
+        <div id="messageContainer">
+            <div id="successMessage" style="display: none;">
+    
+            </div>
+            <div id="errorMessage" style="display: none;">
+    
+            </div>
+        </div>
 
+        <div id="question-container">
+            <h2 id="question"></h2>
+        </div>
     <canvas id="miCanvas"></canvas>
     <div id="countdown"></div>
 
@@ -469,25 +564,119 @@
     <div class="spaceship" id="player">
        <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
     </div>
-    <div style="display: flex; justify-content: space-around;">
+    <div class="planets-container">
         <div class="planet planet1"></div>
         <div class="planet planet2"></div>
         <div class="planet planet3"></div>
     </div>
 
-
     <script>
-const canvas = document.getElementById("miCanvas");
-const ctx = canvas.getContext("2d");
-var isStarted = false;
-var canShoot = false;
-const countdownElement = document.getElementById('countdown');
-var currentQuestionIndex = 0;
-const spaceship = document.getElementById('player');
+    const canvas = document.getElementById("miCanvas");
+    const ctx = canvas.getContext("2d");
+    var isStarted = false;
+    var canShoot = false;
+    const countdownElement = document.getElementById('countdown');
+    var currentQuestionIndex = 0;
+    const spaceship = document.getElementById('player');
+   
+    const questionContainer = document.getElementById('question-container');
+    const questionElement = document.getElementById('question');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+let questions = [
+
+{
+    "question": "2 : 4 = x : 8",
+    "answers": ["x=5", "x=3", "x=4"],
+    //"answers": ["d2-1", "d2-2", "d2-3"],
+    "rigthAnswer": "x=4",
+    "userAnswer": ""
+},
+{
+    "question": "3 : 6 = 9 : x",
+    "answers": ["x=6", "x=18", "x=16"],
+    //"answers": ["d1-1", "d1-2", "d1-3"],
+    "rigthAnswer": "x=18",
+    "userAnswer": ""
+
+},
+{
+    "question": "( 3 + 5 ) * 2",
+    "answers": ["16", "10", "15"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "16",
+    "userAnswer": ""
+},
+{
+    "question": "12 / ( 4 + 2 )",
+    "answers": ["0", "2", "4"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "2",
+    "userAnswer": ""
+},
+{
+    "question": "2x + 3 = 7",
+    "answers": ["5", "4", "2"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "2",
+    "userAnswer": ""
+},
+{
+    "question": "x^2 = 16",
+    "answers": ["4", "8", "16"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "4",
+    "userAnswer": ""
+},
+{
+    "question": "( 2 * 10 ) + 5 * 0",
+    "answers": ["200", "0", "20"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "20",
+    "userAnswer": ""
+},
+{
+    "question": "( 7 + 7 ) - 10",
+    "answers": ["5", "4", "-4"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "4",
+    "userAnswer": ""
+},
+{
+    "question": "( 43 + 9 ) * 0",
+    "answers": ["0", "52", "18"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "0",
+    "userAnswer": ""
+},
+{
+    "question": "( 12 / 2 ) * 5",
+    "answers": ["64", "30", "80"],
+    //"answers": ["d3-1", "d3-2", "d3-3"],
+    "rigthAnswer": "30",
+    "userAnswer": ""
+}
+];
 
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function displayQuestion() {
+        console.log("domande")
+               
+                questionElement.textContent = questions[currentQuestionIndex].question;
+
+                questionContainer.style.display = 'block';
+
+                const planets = document.querySelectorAll('.planet');
+                planets.forEach((planet, index) => {
+                    planet.textContent = questions[currentQuestionIndex].answers[index];
+                    planet.style.opacity = 1;
+                });
+
+                canShoot = true;
+    }
 
 document.addEventListener("DOMContentLoaded", function () {
     const starCount = 45;
@@ -512,6 +701,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Avvia l'animazione delle stelle e il movimento della navicella
         movePlayer();
         moveBullets();
+
+
     }
 
 
@@ -531,16 +722,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 1000);
 
-    // Mostra i pianeti e la navicella dopo 5 secondi
-    const showElementsAfterDelay = () => {
+
+    setTimeout(() => {
+        showPlanets();
+        displayQuestion();
+    }, "4100");
+
+    }
+
+    function showPlanets(){
+
+        
         const planets = document.querySelectorAll('.planet');
         planets.forEach(planet => planet.style.opacity = 1);
         spaceship.style.display = 'flex';
-    };
+  
 
-    setTimeout(showElementsAfterDelay, 4100);
+
     }
 
+    
+    function hidePlanets(){
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach(planet => planet.style.opacity = 0);
+    }
 
 
     function createStar() {
@@ -598,16 +803,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener("resize", () => {
+        console.log("res")
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
 
     let bullets = [];
 
+    let lastShotTime = 0; // Tempo dell'ultimo sparo
+    let shotCount = 0;    // Conteggio dei proiettili sparati nel ciclo corrente
+    const maxShots = 1;   // Numero massimo di proiettili per intervallo
+    const interval = 1000; // Intervallo di tempo in millisecondi (2 secondi)
+
     document.addEventListener('click', function (e) {
-        // Permette di sparare solo se il gioco è iniziato e sono passati 5 secondi
+        const currentTime = Date.now();
+        
         if (isStarted && canShoot) {
-            createBullet(); 
+            // Se è passato l'intervallo di tempo definito o non è stato sparato nulla
+            if (currentTime - lastShotTime > interval) {
+                lastShotTime = currentTime; // Aggiorna il tempo dell'ultimo sparo
+                shotCount = 0; // Resetta il conteggio dei proiettili
+            }
+
+            // Permette di sparare solo se il numero massimo di proiettili non è stato raggiunto
+            if (shotCount < maxShots) {
+                createBullet(); 
+                shotCount++; // Incrementa il conteggio dei proiettili
+            }
         }
     });
 
@@ -620,27 +842,99 @@ document.addEventListener("DOMContentLoaded", function () {
         bullets.push(bullet);
     }
 
+   
     function moveBullets() {
-        bullets.forEach((bullet, index) => {
-            bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
-
-            if (parseInt(bullet.style.bottom) > window.innerHeight) {
-                bullet.remove();
-                bullets.splice(index, 1);
-            }
-
-            const planets = document.querySelectorAll('.planet');
-            planets.forEach((planet, planetIndex) => {
-                if (isCollide(bullet, planet)) {
+            bullets.forEach((bullet, index) => {
+                bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
+                console.log("sparooooooooo")
+                if (parseInt(bullet.style.bottom) > window.innerHeight) {
                     bullet.remove();
                     bullets.splice(index, 1);
-                    planet.style.opacity = 0;
                 }
-            });
-        });
 
-        requestAnimationFrame(moveBullets);
-    }
+                const planets = document.querySelectorAll('.planet');
+                planets.forEach((planet, planetIndex) => {
+                    if (isCollide(bullet, planet)) {
+                        bullet.remove();
+                        bullets.splice(index, 1);
+
+                        
+                        if(canShoot){
+                            canShoot = false;
+                            
+                            if ( planet.textContent === questions[currentQuestionIndex].rigthAnswer) {
+
+                                showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
+                                //document.getElementById('successAns').play();
+                            } else {
+                                showMessage('error', 1500); // Mostra la X animata per 1,5 secondi
+                                //document.getElementById('wrongAns').play();
+                            }
+
+
+                           
+                            createExplosion(planet);
+                            currentQuestionIndex++;
+                        }
+
+
+                        planet.style.opacity = 0
+
+                    
+                    }
+                });
+       
+            });
+            
+            requestAnimationFrame(moveBullets);
+             
+        }
+
+        function showMessage(messageId, duration) {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (messageId === 'success') {
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            } else if (messageId === 'error') {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }, duration);
+        }
+
+        function createExplosion(targetElement) {
+            const explosion = document.createElement('div');
+            explosion.classList.add('explosion');
+            const rect = targetElement.getBoundingClientRect();
+            explosion.style.left = rect.left - 30  + 'px';
+            explosion.style.top = rect.top  - 30 + 'px';
+            document.body.appendChild(explosion);
+            // Rimuovi l'esplosione dopo l'animazione
+            explosion.addEventListener('animationend', () => {
+                explosion.remove();
+            });
+
+
+            setTimeout(() => {
+                questionContainer.style.display = 'none';
+                hidePlanets();
+            }, "2000");
+
+            setTimeout(() => {
+                
+                showPlanets();
+                displayQuestion();
+            }, "4000");
+
+        }
+
+
 
     function isCollide(a, b) {
         const aRect = a.getBoundingClientRect();
