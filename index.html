@@ -24,7 +24,6 @@
         .spaceship {
             width: 60px;
             height: 130px;
-			
 			width: 100px;
             height: 100px;
             background-color: white;
@@ -40,340 +39,355 @@
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
         }
 
-.flame {
-    position: absolute;
-    bottom: 0px;
-	bottom: -16px;
-    left: 51%;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 20px solid rgba(255, 0, 0, 0.8);
-    border-bottom: 20px solid transparent;
-    transform: translateX(-50%) rotate(0deg);
-    animation: flicker 0.2s infinite;
-    z-index: -1; /* Posiziona la fiamma dietro la navicella */
-}
-
-.flame:before {
-    content: '';
-    position: absolute;
-    top: -17px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 15px solid rgba(255, 165, 0, 0.8);
-    border-bottom: 15px solid transparent;
-    transform: translateX(-50%) rotate(0deg);
-}
-
-.flame:after {
-    content: '';
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 10px solid rgba(255, 255, 0, 0.8);
-    border-bottom: 10px solid transparent;
-    transform: translateX(-50%) rotate(0deg);
-}
-
-@keyframes flicker {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) scaleY(1);
-    }
-    20% {
-        opacity: 0.8;
-        transform: translateX(-50%) scaleY(1.1);
-    }
-    40% {
-        opacity: 0.6;
-        transform: translateX(-50%) scaleY(1);
-    }
-    60% {
-        opacity: 0.7;
-        transform: translateX(-50%) scaleY(0.9);
-    }
-    80% {
-        opacity: 0.5;
-        transform: translateX(-50%) scaleY(1.05);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) scaleY(1);
-    }
-}
-
-        .planet {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            color: #fff;
-            width: 140px;
-            height: 140px;
-            background-color: transparent;
-            border-radius: 50%;
-            opacity: 0;
-            margin-top:150px;
-            animation: float 3.2s ease-in-out infinite;
-            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-            filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
+        .flame {
+            position: absolute;
+            bottom: 0px;
+            bottom: -16px;
+            left: 51%;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid rgba(255, 0, 0, 0.8);
+            border-bottom: 20px solid transparent;
+            transform: translateX(-50%) rotate(0deg);
+            animation: flicker 0.2s infinite;
+            z-index: -1; /* Posiziona la fiamma dietro la navicella */
         }
 
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform:  translateY(0);
-            }
-
-            50% {
-                transform: translateY(-25px);
-            }
+        .flame:before {
+            content: '';
+            position: absolute;
+            top: -17px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 15px solid rgba(255, 165, 0, 0.8);
+            border-bottom: 15px solid transparent;
+            transform: translateX(-50%) rotate(0deg);
         }
+
+        .flame:after {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 10px solid rgba(255, 255, 0, 0.8);
+            border-bottom: 10px solid transparent;
+            transform: translateX(-50%) rotate(0deg);
+        }
+
+            @keyframes flicker {
+                0% {
+                    opacity: 1;
+                    transform: translateX(-50%) scaleY(1);
+                }
+                20% {
+                    opacity: 0.8;
+                    transform: translateX(-50%) scaleY(1.1);
+                }
+                40% {
+                    opacity: 0.6;
+                    transform: translateX(-50%) scaleY(1);
+                }
+                60% {
+                    opacity: 0.7;
+                    transform: translateX(-50%) scaleY(0.9);
+                }
+                80% {
+                    opacity: 0.5;
+                    transform: translateX(-50%) scaleY(1.05);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(-50%) scaleY(1);
+                }
+            }
+
+
+           .planets-container {
+                    display: flex;
+                    justify-content: space-evenly; 
+                    width: 100%;
+                    position: absolute;
+                    top: 0; 
+                    left: 0;
+                    right: 0;
+                }
+                
+
+                .planet {
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 35px;
+                    color: #fff;
+                    width: 140px;
+                    height: 140px;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    margin-top:150px;
+                    z-index: -99999;
+                    animation: float 3.2s ease-in-out infinite;
+                    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+                    filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.3)); 
+                }
+
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform:  translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-25px);
+                }
+            }
 
     
 
-        .planet1 {
-            
-            background: url(img/p1.svg);
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+            .planet1 {
+                animation: fadeInFromTop 2s ease-in-out;
+                background: url(img/p1.svg);
+                background-size: cover;
+                background-repeat: no-repeat;
+               
+            }
 
-        .planet2 {
-            
-            background: url(img/p2.svg);
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+            .planet2 {
+                animation: fadeInFromTop 2s ease-in-out;
+                background: url(img/p2.svg);
+                background-size: cover;
+                background-repeat: no-repeat;
+               
+            }
 
-        .planet3 {
-            
-            background: url(img/p3.svg);
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+            .planet3 {
+                animation: fadeInFromTop 2s ease-in-out;
+                background: url(img/p3.svg);
+                background-size: cover;
+                background-repeat: no-repeat;
+               
+            }
 
-        .bullet {
-            width: 9px;
-            height: 35px;
-            background: #2afe00fa;
-            position: absolute;
-            bottom: 70px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(49, 243, 10, 0.7);
-        }
+            .bullet {
+                width: 9px;
+                height: 70px;
+                background: #2afe00fa;
+                position: absolute;
+                bottom: 70px;
+                border-radius: 50%;
+                box-shadow: 0 0 15px rgba(49, 243, 10, 0.7);
+            }
 
 
 
 
         #stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
-    z-index: -1;
-  }
-  
-  .star {
-    position: absolute;
-    background-color: #fff;
-    width: 1px;
-    height: 1px;
-    border-radius: 50%;
-  }
-  
-  .star:before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-    opacity: 0;
-    animation: starTwinkle 2s infinite;
-  }
-  
-  .shooting-star {
-    position: absolute;
-    width: 2px;
-    height: 10px;
-    background-color: #fff;
-    opacity: 1;
-    z-index: 1;
-    transform: rotate(45deg);
-    animation: shootingStarAnimation 0.5s linear forwards;
-  }
-  
-  @keyframes starTwinkle {
-    0% {
-      transform: scale(0.3);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(0.5);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes shootingStarAnimation {
-    0% {
-      opacity: 1;
-      transform: translateX(-200px) translateY(-200px) rotate(70deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(200px) translateY(-300px) rotate(70deg);
-    }
-  }
-
-
-
-
-  #countdown {
-    position: fixed; /* Cambia a fixed per essere sempre centrato rispetto alla finestra */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); /* Sposta l'elemento indietro di metà della sua larghezza e altezza */
-    display: flex; /* Usa flex per centrare il testo al suo interno */
-    align-items: center; /* Centra il testo verticalmente */
-    justify-content: center; /* Centra il testo orizzontalmente */
-    font-size: 150pt; /* Dimensione del testo del countdown */
-    color: white; /* Colore del testo del countdown */
-    z-index: 10; /* Assicura che il countdown sia sopra altri elementi */
-    opacity: 1; /* Imposta l'opacità iniziale */
-    filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
-    animation: fadeInFromTop 1s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
-}
-
-
-
-
-  /* Randomized twinkle delays */
-.star:nth-child(1):before {
-    animation-delay: 0.8s;
-  }
-  
-  .star:nth-child(2):before {
-    animation-delay: 1.2s;
-  }
-  
-  .star:nth-child(3):before {
-    animation-delay: 0.9s;
-  }
-  
-  .star:nth-child(4):before {
-    animation-delay: 1.4s;
-  }
-  
-  .star:nth-child(5):before {
-    animation-delay: 1.1s;
-  }
-  
-  .star:nth-child(6):before {
-    animation-delay: 0.7s;
-  }
-  
-  /* Add more star:nth-child(n):before rules for additional stars */
-  .star:nth-child(7):before {
-    animation-delay: 1.3s;
-  }
-  
-  .star:nth-child(8):before {
-    animation-delay: 0.6s;
-  }
-  
-  .star:nth-child(9):before {
-    animation-delay: 1.5s;
-  }
-  
-  .star:nth-child(10):before {
-    animation-delay: 0.5s;
-  }
-  
-  /* Continue adding star:nth-child(n):before rules for more delays */
-  .star:nth-child(15):before {
-    animation-delay: 0.8s;
-  }
-  
-  .star:nth-child(16):before {
-    animation-delay: 1.2s;
-  }
-  
-  .star:nth-child(17):before {
-    animation-delay: 0.9s;
-  }
-  
-  .star:nth-child(18):before {
-    animation-delay: 1.4s;
-  }
-  
-  .star:nth-child(19):before {
-    animation-delay: 1.1s;
-  }
-  
-  .star:nth-child(20):before {
-    animation-delay: 0.7s;
-  }
-  
-  /* Add more star:nth-child(n):before rules for additional stars */
-  .star:nth-child(11):before {
-    animation-delay: 1.3s;
-  }
-  
-  .star:nth-child(12):before {
-    animation-delay: 0.6s;
-  }
-  
-  .star:nth-child(13):before {
-    animation-delay: 1.5s;
-  }
-  
-  .star:nth-child(14):before {
-    animation-delay: 0.5s;
-  }
-
-
-
-
-
-
-.button-82-pushable {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
+            z-index: -1;
+        }
+    
+        .star {
             position: absolute;
+            background-color: #fff;
+            width: 1px;
+            height: 1px;
+            border-radius: 50%;
+        }
+        
+        .star:before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            animation: starTwinkle 2s infinite;
+        }
+        
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: #fff;
+            opacity: 1;
+            z-index: 1;
+            transform: rotate(45deg);
+            animation: shootingStarAnimation 0.5s linear forwards;
+        }
+        
+        @keyframes starTwinkle {
+            0% {
+            transform: scale(0.3);
+            opacity: 0;
+            }
+            50% {
+            transform: scale(0.5);
+            opacity: 1;
+            }
+            100% {
+            transform: scale(0.5);
+            opacity: 0;
+            }
+        }
+        
+        @keyframes shootingStarAnimation {
+            0% {
+            opacity: 1;
+            transform: translateX(-200px) translateY(-200px) rotate(70deg);
+            }
+            100% {
+            opacity: 0;
+            transform: translateX(200px) translateY(-300px) rotate(70deg);
+            }
+        }
+
+
+
+
+        #countdown {
+            position: fixed; /* Cambia a fixed per essere sempre centrato rispetto alla finestra */
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
-            border: none;
-            background: transparent;
-            padding: 0;
-            cursor: pointer;
-            outline-offset: 4px;
-            transition: filter 250ms;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            z-index: 9999;
-            /*animation: float 3s ease-in-out infinite;*/
-         
+            transform: translate(-50%, -50%); /* Sposta l'elemento indietro di metà della sua larghezza e altezza */
+            display: flex; /* Usa flex per centrare il testo al suo interno */
+            align-items: center; /* Centra il testo verticalmente */
+            justify-content: center; /* Centra il testo orizzontalmente */
+            font-size: 150pt; /* Dimensione del testo del countdown */
+            color: white; /* Colore del testo del countdown */
+            z-index: 10; /* Assicura che il countdown sia sopra altri elementi */
+            opacity: 1; /* Imposta l'opacità iniziale */
+            filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
+            animation: fadeInFromTop 1s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
         }
+
+
+
+
+        /* Randomized twinkle delays */
+        .star:nth-child(1):before {
+            animation-delay: 0.8s;
+        }
+        
+        .star:nth-child(2):before {
+            animation-delay: 1.2s;
+        }
+        
+        .star:nth-child(3):before {
+            animation-delay: 0.9s;
+        }
+        
+        .star:nth-child(4):before {
+            animation-delay: 1.4s;
+        }
+        
+        .star:nth-child(5):before {
+            animation-delay: 1.1s;
+        }
+        
+        .star:nth-child(6):before {
+            animation-delay: 0.7s;
+        }
+        
+        /* Add more star:nth-child(n):before rules for additional stars */
+        .star:nth-child(7):before {
+            animation-delay: 1.3s;
+        }
+        
+        .star:nth-child(8):before {
+            animation-delay: 0.6s;
+        }
+        
+        .star:nth-child(9):before {
+            animation-delay: 1.5s;
+        }
+        
+        .star:nth-child(10):before {
+            animation-delay: 0.5s;
+        }
+        
+        /* Continue adding star:nth-child(n):before rules for more delays */
+        .star:nth-child(15):before {
+            animation-delay: 0.8s;
+        }
+        
+        .star:nth-child(16):before {
+            animation-delay: 1.2s;
+        }
+        
+        .star:nth-child(17):before {
+            animation-delay: 0.9s;
+        }
+        
+        .star:nth-child(18):before {
+            animation-delay: 1.4s;
+        }
+        
+        .star:nth-child(19):before {
+            animation-delay: 1.1s;
+        }
+        
+        .star:nth-child(20):before {
+            animation-delay: 0.7s;
+        }
+        
+        /* Add more star:nth-child(n):before rules for additional stars */
+        .star:nth-child(11):before {
+            animation-delay: 1.3s;
+        }
+        
+        .star:nth-child(12):before {
+            animation-delay: 0.6s;
+        }
+        
+        .star:nth-child(13):before {
+            animation-delay: 1.5s;
+        }
+        
+        .star:nth-child(14):before {
+            animation-delay: 0.5s;
+        }
+
+
+
+
+
+
+        .button-82-pushable {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    border: none;
+                    background: transparent;
+                    padding: 0;
+                    cursor: pointer;
+                    outline-offset: 4px;
+                    transition: filter 250ms;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;
+                    z-index: 9999;
+                    /*animation: float 3s ease-in-out infinite;*/
+                
+                }
 
 
 
@@ -424,12 +438,12 @@
         @keyframes fadeInFromTop {
             0% {
                 opacity: 0;
-                transform: translateX(-50%) translateY(-50px);
+                transform: translateY(-50px);
             }
 
             100% {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform:  translateY(0);
             }
         }
 
@@ -455,7 +469,8 @@
             background-size: cover;
             background-repeat: no-repeat;
             pointer-events: none;
-            animation: explode 0.5s ease-out forwards;
+
+            animation: explode 1s ease-out forwards;
         }
 
         @keyframes explode {
@@ -463,24 +478,28 @@
                 opacity: 1;
                 transform: scale(0);
             }
+
+            35% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+
+            70% {
+                opacity: 0.2;
+                transform: scale(1.5);
+            }
+
             100% {
                 opacity: 0;
-                transform: scale(2);
+                transform: scale(1.5);
             }
         }
 
-        .planets-container {
-            display: flex;
-            justify-content: space-evenly; /* Distribuisce lo spazio uniformemente */
-            width: 100%; /* Assicura che il contenitore prenda tutto lo spazio disponibile */
-            position: absolute;
-            top: 0; /* Puoi regolare la posizione in base alle tue esigenze */
-            left: 0;
-            right: 0;
-            
-        }
+      
+
+
         #question-container {
-            position: absolute;
+            
             animation: fadeInFromTop 2s ease-out forwards;
             left: 50%;
             width: 100%;
@@ -491,6 +510,7 @@
             z-index: 999;
             display: none;
             font-family: 'Luckiest Guy', cursive, sans-serif;
+
         }
 
 
@@ -498,7 +518,7 @@
         #messageContainer {
 
         position: absolute;
-        top: 50%;
+        top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 9999;
@@ -510,11 +530,12 @@
 
         #successMessage {
             display: block;
-            width: 260px;
-            height: 260px;
+            height: 250px;
+            width:  250px;
             background: url("img/tick.svg");
             background-repeat: no-repeat;
             background-size: cover;
+            z-index: 99999;
             /* Lo SVG per il successo */
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
@@ -523,11 +544,12 @@
         #errorMessage {
             display: block;
             background: url("img/wrong.svg");
-            width: 260px;
-            height: 260px;
+			width:  250px;
+            height: 250px;
             background-repeat: no-repeat;
             background-size: cover;
             /* Lo SVG per l'errore */
+            z-index: 99999;
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
         }
@@ -663,7 +685,7 @@ let questions = [
 
 
 function displayQuestion() {
-        console.log("domande")
+       
                
                 questionElement.textContent = questions[currentQuestionIndex].question;
 
@@ -672,7 +694,7 @@ function displayQuestion() {
                 const planets = document.querySelectorAll('.planet');
                 planets.forEach((planet, index) => {
                     planet.textContent = questions[currentQuestionIndex].answers[index];
-                    planet.style.opacity = 1;
+                    //planet.style.display = 'flex';
                 });
 
                 canShoot = true;
@@ -726,25 +748,27 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         showPlanets();
         displayQuestion();
-    }, "4100");
+    }, "4000");
 
     }
 
     function showPlanets(){
 
-        
         const planets = document.querySelectorAll('.planet');
-        planets.forEach(planet => planet.style.opacity = 1);
+        planets.forEach(planet => {
+                planet.style.zIndex = '99999';
+                planet.style.display = 'flex';
+            });
         spaceship.style.display = 'flex';
   
-
-
     }
 
-    
-    function hidePlanets(){
+    function hidePlanets() {
             const planets = document.querySelectorAll('.planet');
-            planets.forEach(planet => planet.style.opacity = 0);
+            planets.forEach(planet => {
+                planet.style.zIndex = '-99999';
+                planet.style.display = 'none';
+            });
     }
 
 
@@ -864,10 +888,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             
                             if ( planet.textContent === questions[currentQuestionIndex].rigthAnswer) {
 
-                                showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
+                                showMessage('success', 1500, planet); // Mostra la spunta animata per 1,5 secondi
                                 //document.getElementById('successAns').play();
                             } else {
-                                showMessage('error', 1500); // Mostra la X animata per 1,5 secondi
+                                showMessage('error', 1500, planet); // Mostra la X animata per 1,5 secondi
                                 //document.getElementById('wrongAns').play();
                             }
 
@@ -878,9 +902,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
 
-                        planet.style.opacity = 0
+                        planet.style.zIndex = '-99999';
 
-                    
+
                     }
                 });
        
@@ -890,9 +914,15 @@ document.addEventListener("DOMContentLoaded", function () {
              
         }
 
-        function showMessage(messageId, duration) {
+        function showMessage(messageId, duration, targetElement) {
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
+            const rect = targetElement.getBoundingClientRect();
+            const messageContainer = document.getElementById('messageContainer');
+            console.log("targetElement.width: " + targetElement.width)
+            messageContainer.style.position = 'absolute';
+            messageContainer.style.left = `${rect.left + targetElement.offsetWidth / 2 }px` ;
+            messageContainer.style.top = `${rect.bottom - targetElement.offsetHeight / 2 }px`; // Position below the planet
 
             if (messageId === 'success') {
                 successMessage.style.display = 'block';
@@ -907,6 +937,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 errorMessage.style.display = 'none';
             }, duration);
         }
+
+        
 
         function createExplosion(targetElement) {
             const explosion = document.createElement('div');
@@ -924,7 +956,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
                 questionContainer.style.display = 'none';
                 hidePlanets();
-            }, "2000");
+            }, "1500");
 
             setTimeout(() => {
                 
