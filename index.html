@@ -84,63 +84,52 @@
         }
 
 
-            .planets-container {
-                  
-                  display: flex;
-                  justify-content: space-evenly; 
-                  width: 100%;
-                  position: absolute;
-                  top: 0; 
-                  left: 0;
-                  right: 0;
-              }
-              
-
-              .planet {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 35px;
-                  color: #fff;
-                  width: 140px;
-                  height: 140px;
-                  background-color: transparent;
-                  border-radius: 50%;
-                  margin-top: 150px;
-                  
-                  position: relative; /* Add this line to allow z-index to work */
-                 
-                  
-                  animation: float 3.2s ease-in-out infinite;
-                  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-                  filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.3)); 
-              }
 
 
+    .planet {
+        position: absolute;
+        width: 140px; /* Dimensione dei pianeti */
+        height: 140px;
 
-            .planet1 {
-                animation: fadeInFromTop 2s ease-in-out;
-                background: url(img/p1.svg);
-                background-size: cover;
-                background-repeat: no-repeat;
-               
-            }
+        /*animation: float 3s ease-in-out infinite;*/
 
-            .planet2 {
-                animation: fadeInFromTop 2s ease-in-out;
-                background: url(img/p2.svg);
-                background-size: cover;
-                background-repeat: no-repeat;
-               
-            }
+    }
 
-            .planet3 {
-                animation: fadeInFromTop 2s ease-in-out;
-                background: url(img/p3.svg);
-                background-size: cover;
-                background-repeat: no-repeat;
-               
-            }
+    .planet1 {
+        background: url(img/p1.svg);
+        left: 17%; /* Sposta il pianeta a sinistra verso l'interno */
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .planet2 {
+        background: url(img/p2.svg);
+        left: 50%; /* Posiziona il pianeta al centro */
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-50%); /* Centrato e un po' sopra il centro */
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .planet3 {
+        background: url(img/p3.svg);
+        right: 17%; /* Sposta il pianeta a destra verso l'interno */
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+
 
             .bullet {
                 width: 9px;
@@ -235,7 +224,7 @@
            
             opacity: 1; /* Imposta l'opacità iniziale */
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
-            animation: fadeInFromTop 1s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
+            animation: fadeInFromTop 2s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
         }
 
 
@@ -393,7 +382,7 @@
         @keyframes fadeInFromTop {
             0% {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-10px);
             }
 
             100% {
@@ -509,14 +498,13 @@
             
             font-size: 30pt;
             color: white;
-          
             width: 60px;
             opacity: 1;
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
-            animation: fadeInFromTop 1s ease-out forwards;
+            animation: fadeInFromTop 1.9s ease-out forwards;
             transform: translateY(-50%);
             width: 50px;
-            border: 4px solid white;
+            border: 4px solid #c20000;
             border-radius: 50%;
             text-align: center;
             }
@@ -526,7 +514,7 @@
             font-size: 30pt;
             flex-grow: 1; /* Permette a #question di occupare tutto lo spazio rimanente */
             text-align: center; /* Assicura che il testo della domanda sia centrato */
-            animation: fadeInFromTop 1s ease-out forwards;
+            animation: fadeInFromTop 1.9s ease-out forwards;
         }
 
         
@@ -595,7 +583,7 @@
         </div>
 
         <div id="question-container">
-            <div class="timer" id="timer">10</div>
+            <div class="timer" id="timer">15</div>
             <div id="question"></div>
             <div class="timer" style="border: 0px">⠀</div>  <!-- invisible char -->
             <div class="planets-container">
@@ -712,19 +700,22 @@ let questions = [
 
         function displayQuestion() {
             // Reset the timer when a new question is displayed
+            questionContainer.style.display = 'flex';
             stopTimer(); // Stop any running timer
 
             questionElement.textContent = questions[currentQuestionIndex].question;
-            debugger
-            questionContainer.style.display = 'flex';
+
             const planets = document.querySelectorAll('.planet');
             planets.forEach((planet, index) => {
+
                 planet.textContent = questions[currentQuestionIndex].answers[index];
+
             });
 
+            resetTimer()
             setTimeout(() => {
                  startTimer(); // Start the new timer
-            }, 500);
+            }, 1000);
             canShoot = true;
         }
 
@@ -743,7 +734,7 @@ let questions = [
                 timerElement.textContent = timerValue > 0 ? timerValue : '0';
                 if (timerValue <= 0) {
                     clearInterval(timerInterval);
-                    debugger;
+
                     questionContainer.style.display = 'none';
                     currentQuestionIndex++;
 
@@ -760,7 +751,7 @@ let questions = [
         }
 
         function resetTimer() {
-            timerElement.textContent = 10;
+            timerElement.textContent = 15;
         }
 
 
@@ -819,18 +810,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    /*
+
     function showPlanets(){
 
         const planets = document.querySelectorAll('.planet');
         planets.forEach(planet => {
-                planet.style.zIndex = '99999';
+
                 planet.style.display = 'flex';
             });
-        spaceship.style.display = 'flex';
-  
     }
-
+    /*
     function hidePlanets() {
             const planets = document.querySelectorAll('.planet');
             planets.forEach(planet => {
@@ -858,7 +847,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 	
     //todo togliere da telefono
-	    function createShootingStar() {
+    function createShootingStar() {
         const shootingStar = document.createElement("div");
         shootingStar.className = "shooting-star";
         shootingStar.style.top = `${Math.random() * 100}%`;
@@ -868,7 +857,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.removeChild(shootingStar);
         }, 3000);
     }
-	
+
     function randomizeShootingStarInterval() {
         const interval = Math.random() * shootingStarInterval;
         setTimeout(function () {
@@ -976,9 +965,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                         
-                       
-                        planet.style.zIndex = '-9999';
-                       
+
+                        planet.style.display = 'none';
+
 
                     }
                 });
@@ -1030,13 +1019,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             setTimeout(() => {
                 questionContainer.style.display = 'none';
+                showPlanets();
                 //hidePlanets();
             }, "1500");
 
             setTimeout(() => {
                 
-                //showPlanets();
+
                 displayQuestion();
+                //showPlanets();
             }, "4000");
 
         }
