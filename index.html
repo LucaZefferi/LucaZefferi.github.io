@@ -7,7 +7,7 @@
     <title>Space Invaders</title>
     <style>
 
-    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
         body {
             margin: 0;
@@ -24,7 +24,7 @@
         .spaceship {
             width: 60px;
             height: 130px;
-			width: 100px;
+            width: 100px;
             height: 100px;
             background-color: white;
             position: absolute;
@@ -35,7 +35,7 @@
             background-size: contain;
             overflow: hidden;
             align-items: center;
-           
+            z-index: 10;
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
         }
 
@@ -52,7 +52,7 @@
             border-bottom: 20px solid transparent;
             transform: translateX(-50%) rotate(0deg);
             animation: flicker 0.2s infinite;
-          
+
         }
 
         .flame:before {
@@ -86,60 +86,15 @@
 
 
 
-    .planet {
-        position: absolute;
-        width: 140px; /* Dimensione dei pianeti */
-        height: 140px;
-
-        /*animation: float 3s ease-in-out infinite;*/
-
-    }
-
-    .planet1 {
-        background: url(img/p1.svg);
-        left: 17%; /* Sposta il pianeta a sinistra verso l'interno */
-        margin-top: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .planet2 {
-        background: url(img/p2.svg);
-        left: 50%; /* Posiziona il pianeta al centro */
-        margin-top: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(-50%); /* Centrato e un po' sopra il centro */
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .planet3 {
-        background: url(img/p3.svg);
-        right: 17%; /* Sposta il pianeta a destra verso l'interno */
-        margin-top: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-
-
-            .bullet {
-                width: 9px;
-                height: 70px;
-                background: #2afe00fa;
-                position: absolute;
-                bottom: 70px;
-                border-radius: 50%;
-                box-shadow: 0 0 15px rgba(49, 243, 10, 0.7);
-            }
+        .bullet {
+            width: 9px;
+            height: 70px;
+            background: #2afe00fa;
+            position: absolute;
+            bottom: 70px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(49, 243, 10, 0.7);
+        }
 
 
         #stars {
@@ -151,7 +106,7 @@
             background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
             z-index: -1;
         }
-    
+
         .star {
             position: absolute;
             background-color: #fff;
@@ -159,7 +114,7 @@
             height: 1px;
             border-radius: 50%;
         }
-        
+
         .star:before {
             content: "";
             position: absolute;
@@ -172,7 +127,7 @@
             opacity: 0;
             animation: starTwinkle 2s infinite;
         }
-        
+
         .shooting-star {
             position: absolute;
             width: 2px;
@@ -183,30 +138,30 @@
             transform: rotate(45deg);
             animation: shootingStarAnimation 0.5s linear forwards;
         }
-        
+
         @keyframes starTwinkle {
             0% {
-            transform: scale(0.3);
-            opacity: 0;
+                transform: scale(0.3);
+                opacity: 0;
             }
             50% {
-            transform: scale(0.5);
-            opacity: 1;
+                transform: scale(0.5);
+                opacity: 1;
             }
             100% {
-            transform: scale(0.5);
-            opacity: 0;
+                transform: scale(0.5);
+                opacity: 0;
             }
         }
-        
+
         @keyframes shootingStarAnimation {
             0% {
-            opacity: 1;
-            transform: translateX(-200px) translateY(-200px) rotate(70deg);
+                opacity: 1;
+                transform: translateX(-200px) translateY(-200px) rotate(70deg);
             }
             100% {
-            opacity: 0;
-            transform: translateX(200px) translateY(-300px) rotate(70deg);
+                opacity: 0;
+                transform: translateX(200px) translateY(-300px) rotate(70deg);
             }
         }
 
@@ -221,7 +176,7 @@
             justify-content: center; /* Centra il testo orizzontalmente */
             font-size: 150pt; /* Dimensione del testo del countdown */
             color: white; /* Colore del testo del countdown */
-           
+
             opacity: 1; /* Imposta l'opacità iniziale */
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3)); /* Aggiunge un'ombra al testo per migliorare la visibilità */
             animation: fadeInFromTop 2s ease-out forwards, zoomInOut 1s infinite; /* Aggiunge animazioni al countdown */
@@ -232,107 +187,105 @@
         .star:nth-child(1):before {
             animation-delay: 0.8s;
         }
-        
+
         .star:nth-child(2):before {
             animation-delay: 1.2s;
         }
-        
+
         .star:nth-child(3):before {
             animation-delay: 0.9s;
         }
-        
+
         .star:nth-child(4):before {
             animation-delay: 1.4s;
         }
-        
+
         .star:nth-child(5):before {
             animation-delay: 1.1s;
         }
-        
+
         .star:nth-child(6):before {
             animation-delay: 0.7s;
         }
-        
+
         /* Add more star:nth-child(n):before rules for additional stars */
         .star:nth-child(7):before {
             animation-delay: 1.3s;
         }
-        
+
         .star:nth-child(8):before {
             animation-delay: 0.6s;
         }
-        
+
         .star:nth-child(9):before {
             animation-delay: 1.5s;
         }
-        
+
         .star:nth-child(10):before {
             animation-delay: 0.5s;
         }
-        
+
         /* Continue adding star:nth-child(n):before rules for more delays */
         .star:nth-child(15):before {
             animation-delay: 0.8s;
         }
-        
+
         .star:nth-child(16):before {
             animation-delay: 1.2s;
         }
-        
+
         .star:nth-child(17):before {
             animation-delay: 0.9s;
         }
-        
+
         .star:nth-child(18):before {
             animation-delay: 1.4s;
         }
-        
+
         .star:nth-child(19):before {
             animation-delay: 1.1s;
         }
-        
+
         .star:nth-child(20):before {
             animation-delay: 0.7s;
         }
-        
+
         /* Add more star:nth-child(n):before rules for additional stars */
         .star:nth-child(11):before {
             animation-delay: 1.3s;
         }
-        
+
         .star:nth-child(12):before {
             animation-delay: 0.6s;
         }
-        
+
         .star:nth-child(13):before {
             animation-delay: 1.5s;
         }
-        
+
         .star:nth-child(14):before {
             animation-delay: 0.5s;
         }
 
 
-
         .button-82-pushable {
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                    border: none;
-                    background: transparent;
-                    padding: 0;
-                    cursor: pointer;
-                    outline-offset: 4px;
-                    transition: filter 250ms;
-                    user-select: none;
-                    -webkit-user-select: none;
-                    touch-action: manipulation;
-                  
-                    /*animation: float 3s ease-in-out infinite;*/
-                
-                }
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            transition: filter 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
 
+            /*animation: float 3s ease-in-out infinite;*/
+
+        }
 
 
         .button-82-front {
@@ -387,7 +340,7 @@
 
             100% {
                 opacity: 1;
-                transform:  translateY(0);
+                transform: translateY(0);
             }
         }
 
@@ -439,27 +392,27 @@
             }
         }
 
-        
+
         #messageContainer {
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
         }
 
         #messageContainer svg {
-        animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
+            animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
         }
 
         #successMessage {
             display: block;
             height: 200px;
-            width:  200px;
+            width: 200px;
             background: url("img/tick.svg");
             background-repeat: no-repeat;
             background-size: cover;
-           
+
             /* Lo SVG per il successo */
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
@@ -469,11 +422,11 @@
             display: block;
             background: url("img/wrong.svg");
             height: 200px;
-            width:  200px;
+            width: 200px;
             background-repeat: no-repeat;
             background-size: cover;
             /* Lo SVG per l'errore */
-          
+
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
         }
@@ -495,7 +448,7 @@
 
 
         .timer {
-            
+
             font-size: 30pt;
             color: white;
             width: 60px;
@@ -507,103 +460,198 @@
             border: 4px solid #c20000;
             border-radius: 50%;
             text-align: center;
-            }
+        }
 
         #question {
-            
+
             font-size: 30pt;
             flex-grow: 1; /* Permette a #question di occupare tutto lo spazio rimanente */
             text-align: center; /* Assicura che il testo della domanda sia centrato */
             animation: fadeInFromTop 1.9s ease-out forwards;
         }
 
-        
+
         @keyframes flicker {
-                0% {
-                    opacity: 1;
-                    transform: translateX(-50%) scaleY(1);
-                }
-                20% {
-                    opacity: 0.8;
-                    transform: translateX(-50%) scaleY(1.1);
-                }
-                40% {
-                    opacity: 0.6;
-                    transform: translateX(-50%) scaleY(1);
-                }
-                60% {
-                    opacity: 0.7;
-                    transform: translateX(-50%) scaleY(0.9);
-                }
-                80% {
-                    opacity: 0.5;
-                    transform: translateX(-50%) scaleY(1.05);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateX(-50%) scaleY(1);
-                }
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) scaleY(1);
             }
-
-
-
-
-            @keyframes float {
-
-                0%,
-                100% {
-                    transform:  translateY(0);
-                }
-
-                50% {
-                    transform: translateY(-25px);
-                }
+            20% {
+                opacity: 0.8;
+                transform: translateX(-50%) scaleY(1.1);
             }
+            40% {
+                opacity: 0.6;
+                transform: translateX(-50%) scaleY(1);
+            }
+            60% {
+                opacity: 0.7;
+                transform: translateX(-50%) scaleY(0.9);
+            }
+            80% {
+                opacity: 0.5;
+                transform: translateX(-50%) scaleY(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scaleY(1);
+            }
+        }
+
+
+        #planets-container {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+        .planet {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+        }
+
+        .planet1 {
+            background: url(img/p1.svg);
+            left: 17%;
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .planet2 {
+            background: url(img/p2.svg);
+            left: 50%;
+            margin-top: 100px;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .planet3 {
+            background: url(img/p3.svg);
+            right: 17%;
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+
+        @keyframes float {
+            0%, 100% {
+                transform:  translateY(0);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+
+
+        #blackScreen {
+
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: top 1s ease-in-out;
+
+        }
+
+        #textNextLevel {
+            display: none;
+            color: #fff;
+            font-size: 30pt;
+        }
     </style>
 </head>
 
 <body>
 
- 
-   
 
 
-        <div class="button-82-pushable" role="button">
-            <div class="button-82-front text" id="startButton">
-            </div>
-        </div>
+<audio id="wrong-audio">
+    <source src="audio/wrong.mp3" type="audio/mpeg">
+</audio>
 
-        <div id="messageContainer">
-            <div id="successMessage" style="display: none;">
-    
-            </div>
-            <div id="errorMessage" style="display: none;">
-    
-            </div>
-        </div>
+<audio id="success-audio">
+    <source src="audio/success.mp3" type="audio/mpeg">
+</audio>
 
-        <div id="question-container">
-            <div class="timer" id="timer">15</div>
-            <div id="question"></div>
-            <div class="timer" style="border: 0px">⠀</div>  <!-- invisible char -->
-            <div class="planets-container">
-                <div class="planet planet1"></div>
-                <div class="planet planet2"></div>
-                <div class="planet planet3"></div>
-            </div>
-        </div>
-	<div id="stars">
-    <canvas id="miCanvas"></canvas>
-	</div>
-    <div id="countdown"></div>
+<audio id="music" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+</audio>
 
-    
-    <div class="spaceship" id="player">
-       <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
+<audio id="laser">
+    <source src="audio/laser.mp3" type="audio/mpeg">
+</audio>
+
+<div id="blackScreen">
+    <div id="textNextLevel">Next level!</div>
+</div>
+
+<div class="button-82-pushable" role="button">
+    <div class="button-82-front text" id="startButton">
     </div>
-    
+</div>
 
-    <script>
+<div id="messageContainer">
+    <div id="successMessage" style="display: none;">
+
+    </div>
+    <div id="errorMessage" style="display: none;">
+
+    </div>
+</div>
+
+<div id="question-container">
+    <div class="timer" id="timer">15</div>
+    <div id="question"></div>
+    <div class="timer" style="border: 0px">⠀</div>  <!-- invisible char -->
+    <div id="planets-container">
+        <div class="planet planet1"></div>
+        <div class="planet planet2"></div>
+        <div class="planet planet3"></div>
+    </div>
+</div>
+<div id="stars">
+    <canvas id="miCanvas"></canvas>
+</div>
+<div id="countdown"></div>
+
+
+<div class="spaceship" id="player">
+    <div class="flame"></div> <!-- Aggiungi questo elemento per la fiamma -->
+</div>
+
+
+<script>
     const canvas = document.getElementById("miCanvas");
     const ctx = canvas.getContext("2d");
     var isStarted = false;
@@ -612,7 +660,7 @@
     const timerElement = document.getElementById('timer');
     var currentQuestionIndex = 0;
     const spaceship = document.getElementById('player');
-    
+
     const planetsContainer = document.getElementById('planets-container');
     const questionContainer = document.getElementById('question-container');
     const questionElement = document.getElementById('question');
@@ -620,21 +668,21 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-let questions = [
+    let questions = [
 
-{
-    "question": "2 : 4 = x : 8",
-    "answers": ["x=5", "x=3", "x=4"],
-    //"answers": ["d2-1", "d2-2", "d2-3"],
-    "rigthAnswer": "x=4",
-    "userAnswer": ""
-},
-{
-    "question": "3 : 6 = 9 : x",
-    "answers": ["x=6", "x=18", "x=16"],
-    //"answers": ["d1-1", "d1-2", "d1-3"],
-    "rigthAnswer": "x=18",
-    "userAnswer": ""
+        {
+            "question": "2 : 4 = x : 8",
+            "answers": ["x=5", "x=3", "x=4"],
+            //"answers": ["d2-1", "d2-2", "d2-3"],
+            "rigthAnswer": "x=4",
+            "userAnswer": ""
+        },
+        {
+            "question": "3 : 6 = 9 : x",
+            "answers": ["x=6", "x=18", "x=16"],
+            //"answers": ["d1-1", "d1-2", "d1-3"],
+            "rigthAnswer": "x=18",
+            "userAnswer": ""
 
 },
 {
@@ -695,10 +743,25 @@ let questions = [
 }
 ];
 
+    function triggerBlackScreen(status, isFinish) {
+        const blackScreen = document.getElementById('blackScreen');
+        if (status === 'on') {
+            if (isFinish) {
+                textNextLevel.style.display = 'block'
+            }
+            blackScreen.style.top = '0';
+        } else if (status === 'off' && !isFinish) {
+            blackScreen.style.top = '-100%';
+        }
+    }
 
-        let timerInterval; // Sposta la dichiarazione fuori da startTimer per avere accesso globale
+    let timerInterval; // Sposta la dichiarazione fuori da startTimer per avere accesso globale
 
-        function displayQuestion() {
+    function displayQuestion() {
+
+
+
+        if(currentQuestionIndex < questions.length ) {
             // Reset the timer when a new question is displayed
             questionContainer.style.display = 'flex';
             stopTimer(); // Stop any running timer
@@ -714,223 +777,253 @@ let questions = [
 
             resetTimer()
             setTimeout(() => {
-                 startTimer(); // Start the new timer
-            }, 1000);
+                startTimer(); // Start the new timer
+                planetsContainer.classList.add('animate-float');
+            }, 2000);
+
             canShoot = true;
+        }else {
+
+            triggerBlackScreen('on', true)
+        }
+    }
+
+    function startTimer() {
+        console.log("start timer");
+        // Reset the timer value to 10
+        let timerValue = 15;
+        timerElement.textContent = timerValue;
+
+        // Clear any previous interval
+        clearInterval(timerInterval);
+
+        // Start a new countdown
+        timerInterval = setInterval(() => {
+            timerValue--;
+            timerElement.textContent = timerValue > 0 ? timerValue : '0';
+            if (timerValue <= 0) {
+                clearInterval(timerInterval);
+
+
+                questionContainer.style.display = 'none';
+                planetsContainer.classList.remove('animate-float');
+
+                currentQuestionIndex++;
+
+                setTimeout(() => {
+
+                    displayQuestion();
+                }, 2000);
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
+    function resetTimer() {
+        timerElement.textContent = 15;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const starCount = 45;
+        const shootingStarInterval = 800;
+        const startButton = document.getElementById('startButton');
+        generateStars();
+
+
+        startButton.addEventListener('click', startGame);
+
+        function startGame() {
+            // Nascondi lo schermo iniziale
+            startButton.style.display = "none";
+            isStarted = true;
+
+
+            startCountdown();
+
+            // Abilita la possibilità di sparare dopo 5 secondi
+            setTimeout(() => {
+                canShoot = true;
+            }, 5000);
+
+            // Avvia l'animazione delle stelle e il movimento della navicella
+            movePlayer();
+            moveBullets();
+
+
         }
 
-        function startTimer() {
-            console.log("start timer");
-            // Reset the timer value to 10
-            let timerValue = 15;
-            timerElement.textContent = timerValue;
 
-            // Clear any previous interval
-            clearInterval(timerInterval);
+        function startCountdown() {
+            // Mostra il countdown e inizializza il valore
+            document.getElementById("music").play();
 
-            // Start a new countdown
-            timerInterval = setInterval(() => {
-                timerValue--;
-                timerElement.textContent = timerValue > 0 ? timerValue : '0';
-                if (timerValue <= 0) {
-                    clearInterval(timerInterval);
 
-                    questionContainer.style.display = 'none';
-                    currentQuestionIndex++;
+            countdownElement.style.display = 'flex';
+            let countdownValue = 3;
+            countdownElement.textContent = countdownValue;
 
-                    setTimeout(() => {
-                        
-                        displayQuestion();
-                    }, 2000);
+            // Aggiorna il countdown ogni secondo
+            const countdownInterval = setInterval(() => {
+                countdownValue--;
+                countdownElement.textContent = countdownValue > 0 ? countdownValue : '';
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.style.display = 'none'; // Nasconde il countdown dopo il completamento
+
                 }
             }, 1000);
+
+
+            setTimeout(() => {
+                //showPlanets();
+                spaceship.style.display = 'flex'
+                displayQuestion();
+            }, "4000");
+
         }
 
-        function stopTimer() {
-            clearInterval(timerInterval);
-        }
 
-        function resetTimer() {
-            timerElement.textContent = 15;
-        }
+        function showPlanets() {
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    const starCount = 45;
-    const shootingStarInterval = 800;
-    const startButton = document.getElementById('startButton');
-    generateStars();
-   
-
-    startButton.addEventListener('click', startGame);
-
-    function startGame() {
-        // Nascondi lo schermo iniziale
-        startButton.style.display = "none";
-        isStarted = true;
-        startCountdown();
-        
-        // Abilita la possibilità di sparare dopo 5 secondi
-        setTimeout(() => {
-            canShoot = true;
-        }, 5000);
-
-        // Avvia l'animazione delle stelle e il movimento della navicella
-        movePlayer();
-        moveBullets();
-
-
-    }
-
-    
- 
-    function startCountdown() {
-    // Mostra il countdown e inizializza il valore
-    countdownElement.style.display = 'flex';
-    let countdownValue = 3;
-    countdownElement.textContent = countdownValue;
-    
-    // Aggiorna il countdown ogni secondo
-    const countdownInterval = setInterval(() => {
-        countdownValue--;
-        countdownElement.textContent = countdownValue > 0 ? countdownValue : '';
-        if (countdownValue <= 0) {
-            clearInterval(countdownInterval);
-            countdownElement.style.display = 'none'; // Nasconde il countdown dopo il completamento
-           
-        }
-    }, 1000);
-
-
-    setTimeout(() => {
-        //showPlanets();
-        spaceship.style.display = 'flex'
-        displayQuestion();
-    }, "4000");
-
-    }
-
-
-    function showPlanets(){
-
-        const planets = document.querySelectorAll('.planet');
-        planets.forEach(planet => {
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach(planet => {
 
                 planet.style.display = 'flex';
             });
-    }
-    /*
-    function hidePlanets() {
-            const planets = document.querySelectorAll('.planet');
-            planets.forEach(planet => {
-                planet.style.zIndex = '-99999';
-                planet.style.display = 'none';
-            });
-    }
-    */
-
-	
-    function createStar() {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        document.getElementById("stars").appendChild(star);
-    }
-
-
-
-    function generateStars() {
-        for (let i = 0; i < starCount; i++) {
-            createStar();
         }
-    }
-	
-    //todo togliere da telefono
-    function createShootingStar() {
-        const shootingStar = document.createElement("div");
-        shootingStar.className = "shooting-star";
-        shootingStar.style.top = `${Math.random() * 100}%`;
-        shootingStar.style.left = `${Math.random() * 100}%`;
-        document.body.appendChild(shootingStar);
-        setTimeout(() => {
-            document.body.removeChild(shootingStar);
-        }, 3000);
-    }
 
-    function randomizeShootingStarInterval() {
-        const interval = Math.random() * shootingStarInterval;
-        setTimeout(function () {
-            createShootingStar();
-            randomizeShootingStarInterval();
-        }, interval);
-    }
-    randomizeShootingStarInterval();
-	//todo togliere da telefono
-	generateStars();
-    
-	
-    
+        /*
+        function hidePlanets() {
+                const planets = document.querySelectorAll('.planet');
+                planets.forEach(planet => {
+                    planet.style.zIndex = '-99999';
+                    planet.style.display = 'none';
+                });
+        }
+        */
 
-    let playerX = canvas.width / 2 - 100;
 
-    function drawPlayer() {
-        spaceship.style.left = playerX + 'px';
-    }
+        function createStar() {
+            const star = document.createElement("div");
+            star.className = "star";
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            document.getElementById("stars").appendChild(star);
+        }
 
-    // Modifica per il movimento del mouse
-    document.addEventListener('mousemove', function (e) {
-        playerX = e.clientX - spaceship.offsetWidth / 2;
-        drawPlayer();
-    });
 
-    function movePlayer() {
-        drawPlayer();
-        requestAnimationFrame(movePlayer);
-    }
-
-    window.addEventListener("resize", () => {
-        console.log("res")
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-
-    let bullets = [];
-
-    let lastShotTime = 0; // Tempo dell'ultimo sparo
-    let shotCount = 0;    // Conteggio dei proiettili sparati nel ciclo corrente
-    const maxShots = 1;   // Numero massimo di proiettili per intervallo
-    const interval = 1000; // Intervallo di tempo in millisecondi (2 secondi)
-
-    document.addEventListener('click', function (e) {
-        const currentTime = Date.now();
-        
-        if (isStarted && canShoot) {
-            // Se è passato l'intervallo di tempo definito o non è stato sparato nulla
-            if (currentTime - lastShotTime > interval) {
-                lastShotTime = currentTime; // Aggiorna il tempo dell'ultimo sparo
-                shotCount = 0; // Resetta il conteggio dei proiettili
-            }
-
-            // Permette di sparare solo se il numero massimo di proiettili non è stato raggiunto
-            if (shotCount < maxShots) {
-                createBullet(); 
-                shotCount++; // Incrementa il conteggio dei proiettili
+        function generateStars() {
+            for (let i = 0; i < starCount; i++) {
+                createStar();
             }
         }
-    });
 
-    function createBullet() {
-        let bullet = document.createElement('div');
-        bullet.classList.add('bullet');
-        bullet.style.left = playerX + spaceship.offsetWidth / 2 - 2.5 + 'px';
-        bullet.style.bottom = '70px';
-        document.body.appendChild(bullet);
-        bullets.push(bullet);
-    }
+        //todo togliere da telefono
+        function createShootingStar() {
+            const shootingStar = document.createElement("div");
+            shootingStar.className = "shooting-star";
+            shootingStar.style.top = `${Math.random() * 100}%`;
+            shootingStar.style.left = `${Math.random() * 100}%`;
+            document.body.appendChild(shootingStar);
+            setTimeout(() => {
+                document.body.removeChild(shootingStar);
+            }, 3000);
+        }
 
-   
-    function moveBullets() {
+        function randomizeShootingStarInterval() {
+            const interval = Math.random() * shootingStarInterval;
+            setTimeout(function () {
+                createShootingStar();
+                randomizeShootingStarInterval();
+            }, interval);
+        }
+
+        randomizeShootingStarInterval();
+        //todo togliere da telefono
+        generateStars();
+
+
+        let playerX = canvas.width / 2 - 100;
+
+        function drawPlayer(mouseX) {
+            const centerX = window.innerWidth / 2; // Centro dello schermo
+            const maxRotation = 15; // Angolo massimo di inclinazione in gradi
+
+            // Calcola la percentuale di quanto è lontano il mouse dal centro
+            const distanceFromCenter = (mouseX - centerX) / centerX;
+
+            // Calcola l'angolo di rotazione basato sulla distanza dal centro
+            const rotation = maxRotation * distanceFromCenter;
+
+            // Applica la rotazione e la posizione alla navicella
+            spaceship.style.transform = `translateX(${playerX}px) rotate(${rotation}deg)`;
+
+
+        }
+
+        function resetPlayer() {
+            // Riporta la navicella in posizione dritta
+            spaceship.style.transform = `translateX(${playerX}px) rotate(0deg)`;
+        }
+
+        // Modifica per il movimento del mouse
+        document.addEventListener('mousemove', function (e) {
+            playerX = e.clientX - spaceship.offsetWidth / 2;
+            drawPlayer(e.clientX);
+        });
+
+        function movePlayer() {
+            drawPlayer();
+            requestAnimationFrame(movePlayer);
+        }
+
+        window.addEventListener("resize", () => {
+            console.log("res")
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        let bullets = [];
+
+        let lastShotTime = 0; // Tempo dell'ultimo sparo
+        let shotCount = 0;    // Conteggio dei proiettili sparati nel ciclo corrente
+        const maxShots = 1;   // Numero massimo di proiettili per intervallo
+        const interval = 1000; // Intervallo di tempo in millisecondi (2 secondi)
+
+        document.addEventListener('click', function (e) {
+            const currentTime = Date.now();
+
+            if (isStarted && canShoot) {
+                // Se è passato l'intervallo di tempo definito o non è stato sparato nulla
+                if (currentTime - lastShotTime > interval) {
+                    lastShotTime = currentTime; // Aggiorna il tempo dell'ultimo sparo
+                    shotCount = 0; // Resetta il conteggio dei proiettili
+                }
+
+                // Permette di sparare solo se il numero massimo di proiettili non è stato raggiunto
+                if (shotCount < maxShots) {
+                    createBullet();
+                    shotCount++; // Incrementa il conteggio dei proiettili
+                }
+            }
+        });
+
+        function createBullet() {
+            let bullet = document.createElement('div');
+            bullet.classList.add('bullet');
+            bullet.style.left = playerX + spaceship.offsetWidth / 2 - 2.5 + 'px';
+            bullet.style.bottom = '70px';
+            document.body.appendChild(bullet);
+            bullets.push(bullet);
+            document.getElementById("laser").play();
+        }
+
+
+        function moveBullets() {
             bullets.forEach((bullet, index) => {
                 bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
                 console.log("sparooooooooo")
@@ -944,17 +1037,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (isCollide(bullet, planet)) {
                         bullet.remove();
                         bullets.splice(index, 1);
-                        
-                        
-                        if(canShoot){
-                            canShoot = false;
-                            
-                            if ( planet.textContent === questions[currentQuestionIndex].rigthAnswer) {
 
+
+                        if (canShoot) {
+                            canShoot = false;
+
+                            if (planet.textContent === questions[currentQuestionIndex].rigthAnswer) {
+                                document.getElementById("success-audio").play();
                                 showMessage('success', 1500, planet); // Mostra la spunta animata per 1,5 secondi
+
                                 //document.getElementById('successAns').play();
                             } else {
+                                document.getElementById("wrong-audio").play();
                                 showMessage('error', 1500, planet); // Mostra la X animata per 1,5 secondi
+
                                 //document.getElementById('wrongAns').play();
                             }
 
@@ -964,18 +1060,17 @@ document.addEventListener("DOMContentLoaded", function () {
                             currentQuestionIndex++;
                         }
 
-                        
 
                         planet.style.display = 'none';
 
 
                     }
                 });
-       
+
             });
-            
+
             requestAnimationFrame(moveBullets);
-             
+
         }
 
         function showMessage(messageId, duration, targetElement) {
@@ -983,10 +1078,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const errorMessage = document.getElementById('errorMessage');
             const rect = targetElement.getBoundingClientRect();
             const messageContainer = document.getElementById('messageContainer');
-          
+
             messageContainer.style.position = 'absolute';
-            messageContainer.style.left = `${rect.left + targetElement.offsetWidth / 2 }px` ;
-            messageContainer.style.top = `${rect.bottom - targetElement.offsetHeight / 2 }px`; // Position below the planet
+            messageContainer.style.left = `${rect.left + targetElement.offsetWidth / 2 + 10}px`;
+            messageContainer.style.top = `${rect.bottom - targetElement.offsetHeight / 3 - 10}px`; // Position below the planet
 
             if (messageId === 'success') {
                 successMessage.style.display = 'block';
@@ -1002,14 +1097,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }, duration);
         }
 
-        
 
         function createExplosion(targetElement) {
             const explosion = document.createElement('div');
             explosion.classList.add('explosion');
             const rect = targetElement.getBoundingClientRect();
-            explosion.style.left = rect.left - 30  + 'px';
-            explosion.style.top = rect.top  - 30 + 'px';
+            explosion.style.left = rect.left - 30 + 'px';
+            explosion.style.top = rect.top - 30 + 'px';
             document.body.appendChild(explosion);
             // Rimuovi l'esplosione dopo l'animazione
             explosion.addEventListener('animationend', () => {
@@ -1018,13 +1112,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             setTimeout(() => {
+                planetsContainer.classList.remove('animate-float');
                 questionContainer.style.display = 'none';
                 showPlanets();
                 //hidePlanets();
             }, "1500");
 
             setTimeout(() => {
-                
+
 
                 displayQuestion();
                 //showPlanets();
@@ -1033,21 +1128,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        function isCollide(a, b) {
+            const aRect = a.getBoundingClientRect();
+            const bRect = b.getBoundingClientRect();
 
-    function isCollide(a, b) {
-        const aRect = a.getBoundingClientRect();
-        const bRect = b.getBoundingClientRect();
+            return !(
+                aRect.top > bRect.bottom ||
+                aRect.bottom < bRect.top ||
+                aRect.right < bRect.left ||
+                aRect.left > bRect.right
+            );
+        }
+    });
 
-        return !(
-            aRect.top > bRect.bottom ||
-            aRect.bottom < bRect.top ||
-            aRect.right < bRect.left ||
-            aRect.left > bRect.right
-        );
-    }
-});
-
-    </script>
+</script>
 </body>
 
 </html>
