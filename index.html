@@ -12,6 +12,7 @@
         body {
             margin: 0;
             overflow: hidden;
+            cursor: url('img/crosshair.png') 48 48, auto;
             background: linear-gradient(90deg, #01041F 0%, #082B33 100%);
             font-family: 'Luckiest Guy', cursive, sans-serif;
             user-select: none; /* Impedisce la selezione del testo */
@@ -82,8 +83,6 @@
             border-bottom: 10px solid transparent;
             transform: translateX(-50%) rotate(0deg);
         }
-
-
 
 
         .bullet {
@@ -433,6 +432,7 @@
 
         #question-container {
             display: none;
+
             margin-top: 20px;
             margin-left: 20px;
             margin-right: 20px;
@@ -442,7 +442,7 @@
             font-size: 24pt;
             text-align: center;
             justify-content: center; /* Centra il contenuto orizzontalmente */
-            align-items: center; /* Centra il contenuto verticalmente */
+            align-items: baseline;; /* Centra il contenuto verticalmente */
             font-family: 'Luckiest Guy', cursive, sans-serif;
         }
 
@@ -501,38 +501,39 @@
 
         #planets-container {
             position: fixed;
-            top: 10px;
+            top: 30px;
             left: 0;
             width: 100%;
             height: 100%;
         }
 
 
-
         .planet {
             position: absolute;
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             background-size: cover;
             background-repeat: no-repeat;
+            text-shadow: 0 15px 15px rgba(0, 0, 0, 0.6);
 
         }
 
         .planet1 {
             background: url(img/p1.svg);
             left: 17%;
-            margin-top: 100px;
+            margin-top: 110px;
             display: flex;
             justify-content: center;
             align-items: center;
             background-size: cover;
             background-repeat: no-repeat;
+
         }
 
         .planet2 {
             background: url(img/p2.svg);
             left: 50%;
-            margin-top: 100px;
+            margin-top: 110px;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
@@ -544,7 +545,7 @@
         .planet3 {
             background: url(img/p3.svg);
             right: 17%;
-            margin-top: 100px;
+            margin-top: 110px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -555,7 +556,7 @@
 
         @keyframes float {
             0%, 100% {
-                transform:  translateY(0);
+                transform: translateY(0);
             }
             50% {
                 transform: translateY(-25px);
@@ -565,7 +566,6 @@
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }
-
 
 
         #blackScreen {
@@ -589,11 +589,167 @@
             color: #fff;
             font-size: 30pt;
         }
+
+        .index-container {
+            display: flex;
+            justify-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+
+
+        @media (max-width: 768px) {
+
+
+            .timer {
+
+                font-size: 21pt;
+
+            }
+
+            #question {
+
+                font-size: 21pt;
+                top: 20px;
+                padding: 16px 0;
+            }
+            .index {
+
+                font-size: 21pt;
+
+            }
+
+            .index-container{
+
+
+                font-size: 21pt;
+            }
+
+            #planets-container{
+
+                top: 80px;
+            }
+
+            .planet {
+                width: 150px;
+                height: 150px;
+
+            }
+            .planet1 {
+                left: 10%;
+                margin-top:130px;
+            }
+
+            .planet2 {
+                left: 50%;
+                margin-top:130px;
+            }
+
+            .planet3 {
+                right: 10%;
+                margin-top:130px;
+            }
+
+            .explosion {
+
+                width: 150px;
+                height: 150px;
+
+            }
+
+            .button-82-front {
+                width: 500px;
+                height: 500px;
+                padding: 6px 12px;
+            }
+
+            #question-container{
+                font-size: 19pt;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+
+            .timer {
+
+                font-size: 22pt;
+
+            }
+
+            #question {
+
+                font-size: 22pt;
+                top: 20px;
+                padding: 16px 0;
+            }
+            .index {
+
+                font-size: 20pt;
+
+            }
+
+            .index-container{
+
+                position: absolute;
+                top: 0;
+                left: 85%;
+                font-size: 22pt;
+            }
+
+            #planets-container{
+
+                top: 80px;
+            }
+
+            .planet {
+                width: 100px;
+                height: 100px;
+
+            }
+            .planet1 {
+                left: 2%;
+                margin-top:130px;
+            }
+
+            .planet2 {
+                left: 50%;
+                margin-top:130px;
+            }
+
+            .planet3 {
+                right: 2%;
+                margin-top:130px;
+            }
+
+            .explosion {
+
+                width: 150px;
+                height: 150px;
+
+            }
+
+            .button-82-front {
+                width: 400px;
+                height: 400px;
+                padding: 6px 12px;
+            }
+
+            #question-container{
+                font-size: 18pt;
+            }
+
+        }
+
+
     </style>
 </head>
 
 <body>
-
 
 
 <audio id="wrong-audio">
@@ -633,7 +789,10 @@
 <div id="question-container">
     <div class="timer" id="timer">15</div>
     <div id="question"></div>
-    <div class="timer" style="border: 0px">⠀</div>  <!-- invisible char -->
+    <div class="index-container" style="border: 0px">
+        <div class="index" id="index">1</div>
+        /25
+    </div>  <!-- invisible char -->
     <div id="planets-container">
         <div class="planet planet1"></div>
         <div class="planet planet2"></div>
@@ -659,6 +818,7 @@
     const countdownElement = document.getElementById('countdown');
     const timerElement = document.getElementById('timer');
     var currentQuestionIndex = 0;
+    const indexElement = document.getElementById('index');
     const spaceship = document.getElementById('player');
 
     const planetsContainer = document.getElementById('planets-container');
@@ -671,77 +831,186 @@
     let questions = [
 
         {
-            "question": "2 : 4 = x : 8",
-            "answers": ["x=5", "x=3", "x=4"],
+            "question": "If I ____ the truth, I would have told you earlier.",
+            "answers": ["had known", "knew", "know"],
             //"answers": ["d2-1", "d2-2", "d2-3"],
-            "rigthAnswer": "x=4",
+            "rigthAnswer": "had known",
             "userAnswer": ""
         },
         {
-            "question": "3 : 6 = 9 : x",
-            "answers": ["x=6", "x=18", "x=16"],
+            "question": "He suggested that she ____ a doctor as soon as possible.",
+            "answers": ["sees", "see", "saw"],
             //"answers": ["d1-1", "d1-2", "d1-3"],
-            "rigthAnswer": "x=18",
+            "rigthAnswer": "see",
             "userAnswer": ""
 
-},
-{
-    "question": "( 3 + 5 ) * 2",
-    "answers": ["16", "10", "15"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "16",
-    "userAnswer": ""
-},
-{
-    "question": "12 / ( 4 + 2 )",
-    "answers": ["0", "2", "4"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "2",
-    "userAnswer": ""
-},
-{
-    "question": "2x + 3 = 7",
-    "answers": ["5", "4", "2"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "2",
-    "userAnswer": ""
-},
-{
-    "question": "x^2 = 16",
-    "answers": ["4", "8", "16"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "4",
-    "userAnswer": ""
-},
-{
-    "question": "( 2 * 10 ) + 5 * 0",
-    "answers": ["200", "0", "20"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "20",
-    "userAnswer": ""
-},
-{
-    "question": "( 7 + 7 ) - 10",
-    "answers": ["5", "4", "-4"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "4",
-    "userAnswer": ""
-},
-{
-    "question": "( 43 + 9 ) * 0",
-    "answers": ["0", "52", "18"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "0",
-    "userAnswer": ""
-},
-{
-    "question": "( 12 / 2 ) * 5",
-    "answers": ["64", "30", "80"],
-    //"answers": ["d3-1", "d3-2", "d3-3"],
-    "rigthAnswer": "30",
-    "userAnswer": ""
-}
-];
+        },
+        {
+            "question": "By the time we arrived, the concert ____.",
+            "answers": ["had already started", "started", "was starting"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had already started",
+            "userAnswer": ""
+        },
+        {
+            "question": "It’s high time you ____ making excuses and started working.",
+            "answers": ["stop", "stopped", "had stopped"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "stopped",
+            "userAnswer": ""
+        },
+        {
+            "question": "I wish I ____ the decision to move abroad earlier.",
+            "answers": ["made", "had made", "would make"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had made",
+            "userAnswer": ""
+        },
+        {
+            "question": "She said she ____ to finish the project by next week.",
+            "answers": ["will try", "would try", "tried"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "would try",
+            "userAnswer": ""
+        },
+        {
+            "question": "____ I known about the meeting, I would have attended.",
+            "answers": ["If", "Had", "Were"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "Had",
+            "userAnswer": ""
+        },
+        {
+            "question": "I don’t remember ____ her at the party.",
+            "answers": ["seeing", "see", "to see"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "seeing",
+            "userAnswer": ""
+        },
+        {
+            "question": "They would have arrived on time if they ____ the right train.",
+            "answers": ["catch", "caught", "had caught"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had caught",
+            "userAnswer": ""
+        },
+        {
+            "question": "The manager demanded that the report ____ immediately.",
+            "answers": ["is submitted", "was submitted", "be submitted"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "be submitted",
+            "userAnswer": ""
+        },
+        {
+            "question": "By the time you arrive, I ____ dinner",
+            "answers": ["will have finished", "am finishing", "finished"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "will have finished",
+            "userAnswer": ""
+        },
+        {
+            "question": "She acts as if she ____ everything.",
+            "answers": ["knows", "knew", "had known"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "knew",
+            "userAnswer": ""
+        },
+        {
+            "question": "I was hoping you ____ come to the party last night.",
+            "answers": ["would", "will", "had"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "would",
+            "userAnswer": ""
+        },
+        {
+            "question": "If they ____ harder, they could have won the game.",
+            "answers": ["try", "tried", "had tried"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had tried",
+            "userAnswer": ""
+        },
+        {
+            "question": "I’ll give you the book after I ____ it.",
+            "answers": ["finish", "finished", "have finished"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "have finished",
+            "userAnswer": ""
+        },
+        {
+            "question": "I’d rather you ____ about this to anyone.",
+            "answers": ["not talk", "didn’t talk", "don’t talk"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "didn’t talk",
+            "userAnswer": ""
+        },
+        {
+            "question": "He has been working here since he ____ school.",
+            "answers": ["left", "leaves", "was leaving"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "left",
+            "userAnswer": ""
+        },
+        {
+            "question": "If I ____ more money, I would travel the world.",
+            "answers": ["have", "had", "would have"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had",
+            "userAnswer": ""
+        },
+        {
+            "question": "I’ll let you know as soon as I ____ more information.",
+            "answers": ["will have", "have", "had"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "have",
+            "userAnswer": ""
+        },
+        {
+            "question": "The lawyer insisted that his client ____ innocent.",
+            "answers": ["was", "be", "is"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "be",
+            "userAnswer": ""
+        },
+        {
+            "question": "She wouldn’t have missed the train if she ____ earlier.",
+            "answers": ["had left", "would leave", "leaves"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "had left",
+            "userAnswer": ""
+        },
+        {
+            "question": "Had it not been for the traffic, we ____ on time.",
+            "answers": ["would arrive", "will arrive", "would have arrived"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "would have arrived",
+            "userAnswer": ""
+        },
+        {
+            "question": "I regret ____ him my secret.",
+            "answers": ["telling", "to tell", "told"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "telling",
+            "userAnswer": ""
+        },
+        {
+            "question": "You’d better ____ late again if you want to keep your job.",
+            "answers": ["not be", "be not", "not to be"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "not be",
+            "userAnswer": ""
+        },
+        {
+            "question": "I’ll call you after I ____ from the meeting.",
+            "answers": ["will leave", "leave", "left"],
+            //"answers": ["d3-1", "d3-2", "d3-3"],
+            "rigthAnswer": "leave",
+            "userAnswer": ""
+        },
+    ];
+
+    function isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    }
 
     function triggerBlackScreen(status, isFinish) {
         const blackScreen = document.getElementById('blackScreen');
@@ -760,13 +1029,18 @@
     function displayQuestion() {
 
 
-
-        if(currentQuestionIndex < questions.length ) {
+        if (currentQuestionIndex < questions.length) {
             // Reset the timer when a new question is displayed
-            questionContainer.style.display = 'flex';
+            if(window.outerWidth > 468){
+                questionContainer.style.display = 'flex';
+            }else{
+                questionContainer.style.display = 'block';
+            }
+
             stopTimer(); // Stop any running timer
 
             questionElement.textContent = questions[currentQuestionIndex].question;
+            indexElement.textContent = currentQuestionIndex + 1
 
             const planets = document.querySelectorAll('.planet');
             planets.forEach((planet, index) => {
@@ -782,7 +1056,7 @@
             }, 2000);
 
             canShoot = true;
-        }else {
+        } else {
 
             triggerBlackScreen('on', true)
         }
@@ -804,11 +1078,12 @@
             if (timerValue <= 0) {
                 clearInterval(timerInterval);
 
-
+                canShoot = false;
                 questionContainer.style.display = 'none';
                 planetsContainer.classList.remove('animate-float');
 
                 currentQuestionIndex++;
+
 
                 setTimeout(() => {
 
@@ -922,28 +1197,32 @@
             }
         }
 
-        //todo togliere da telefono
-        function createShootingStar() {
-            const shootingStar = document.createElement("div");
-            shootingStar.className = "shooting-star";
-            shootingStar.style.top = `${Math.random() * 100}%`;
-            shootingStar.style.left = `${Math.random() * 100}%`;
-            document.body.appendChild(shootingStar);
-            setTimeout(() => {
-                document.body.removeChild(shootingStar);
-            }, 3000);
+
+// Controlla se non è un dispositivo mobile
+        if (!isMobileDevice()) {
+            function createShootingStar() {
+                const shootingStar = document.createElement("div");
+                shootingStar.className = "shooting-star";
+                shootingStar.style.top = `${Math.random() * 100}%`;
+                shootingStar.style.left = `${Math.random() * 100}%`;
+                document.body.appendChild(shootingStar);
+                setTimeout(() => {
+                    document.body.removeChild(shootingStar);
+                }, 3000);
+            }
+
+            function randomizeShootingStarInterval() {
+                const interval = Math.random() * shootingStarInterval;
+                setTimeout(function () {
+                    createShootingStar();
+                    randomizeShootingStarInterval();
+                }, interval);
+            }
+
+            randomizeShootingStarInterval();
         }
 
-        function randomizeShootingStarInterval() {
-            const interval = Math.random() * shootingStarInterval;
-            setTimeout(function () {
-                createShootingStar();
-                randomizeShootingStarInterval();
-            }, interval);
-        }
 
-        randomizeShootingStarInterval();
-        //todo togliere da telefono
         generateStars();
 
 
@@ -1025,7 +1304,7 @@
 
         function moveBullets() {
             bullets.forEach((bullet, index) => {
-                bullet.style.bottom = parseInt(bullet.style.bottom) + 10 + 'px';
+                bullet.style.bottom = parseInt(bullet.style.bottom) + 25 + 'px';
                 console.log("sparooooooooo")
                 if (parseInt(bullet.style.bottom) > window.innerHeight) {
                     bullet.remove();
@@ -1058,6 +1337,7 @@
                             stopTimer()
                             createExplosion(planet);
                             currentQuestionIndex++;
+
                         }
 
 
@@ -1080,8 +1360,8 @@
             const messageContainer = document.getElementById('messageContainer');
 
             messageContainer.style.position = 'absolute';
-            messageContainer.style.left = `${rect.left + targetElement.offsetWidth / 2 + 10}px`;
-            messageContainer.style.top = `${rect.bottom - targetElement.offsetHeight / 3 - 10}px`; // Position below the planet
+            messageContainer.style.left = `${rect.left + targetElement.offsetWidth / 2}px`;
+            messageContainer.style.top = `${rect.bottom - targetElement.offsetHeight / 3 - 30}px`; // Position below the planet
 
             if (messageId === 'success') {
                 successMessage.style.display = 'block';
