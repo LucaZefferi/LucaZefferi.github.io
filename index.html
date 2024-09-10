@@ -493,74 +493,74 @@
         let questions = [
 
             {
-                "question": "Comando per creare una tabella in SQL?",
-                "answers": ["DELETE", "INT", "CREATE"],
+                "question": "3x + 4 = 19",
+                "answers": ["x=4", "x=5", "x=6"],
                 //"answers": ["d2-1", "d2-2", "d2-3"],
-                "rigthAnswer": "CREATE",
+                "rigthAnswer": "5",
                 "userAnswer": ""
             },
             {
-                "question": "Clausola per rimuovere duplicati in SQL?",
-                "answers": ["SELECT", "DISTINCT", "HAVING"],
+                "question": "2x = 10 + 4",
+                "answers": ["20", "6", "7"],
                 //"answers": ["d1-1", "d1-2", "d1-3"],
-                "rigthAnswer": "DISTINCT",
+                "rigthAnswer": "7",
                 "userAnswer": ""
 
             },
             {
-                "question": "Parola chiave per classe non ereditabile in JAVA?",
-                "answers": ["VOID", "STATIC", "FINAL"],
+                "question": "3x + 5 = 11",
+                "answers": ["6", "2", "4"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "FINAL",
+                "rigthAnswer": "2",
                 "userAnswer": ""
             },
             {
-                "question": "Simbolo per accedere ai metodi di un obj in JAVA?",
-                "answers": [".", "?", "+"],
+                "question": "2 (x − 3) = 8",
+                "answers": ["5", "6", "7"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": ".",
+                "rigthAnswer": "7",
                 "userAnswer": ""
             },
             {
-                "question": "Operatore di uguaglianza stretta in JS?",
-                "answers": ["eq", "===", "!"],
+                "question": "( 8 * 8 ) / ( 4 * 4 )",
+                "answers": ["4", "16", "8"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "===",
+                "rigthAnswer": "4",
                 "userAnswer": ""
             },
             {
-                "question": "Parola chiave per dichiarare una variabile in JS?",
-                "answers": ["int", "dec", "var"],
+                "question": "5 + 8 * 7",
+                "answers": ["51", "91", "61"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "var",
+                "rigthAnswer": "61",
                 "userAnswer": ""
             },
             {
-                "question": "Tag per collegamento ipertestuale in HTML?",
-                "answers": ["<a>", "<h1>", "<li>"],
+                "question": "(12 * 12) * 10",
+                "answers": ["144", "1440", "14"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "<a>",
+                "rigthAnswer": "1440",
                 "userAnswer": ""
             },
             {
-                "question": "Attributo per URL immagine in HTML?",
-                "answers": ["dml", "src", "link"],
+                "question": "32x - 56 = 8",
+                "answers": ["4", "3", " 2"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "src",
+                "rigthAnswer": "2",
                 "userAnswer": ""
             },
             {
-                "question": "Parola chiave per costante in C++?",
-                "answers": ["unique", "point", "const"],
+                "question": "(x / 2) + 2 = 5",
+                "answers": ["6", "9", "3"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "const",
+                "rigthAnswer": "6",
                 "userAnswer": ""
             },
             {
-                "question": "Simbolo per referenza in C++?",
-                "answers": ["REF", "&", "DEC"],
+                "question": "5x + 7 = 2x 16",
+                "answers": ["2", "3", "4"],
                 //"answers": ["d3-1", "d3-2", "d3-3"],
-                "rigthAnswer": "&",
+                "rigthAnswer": "3",
                 "userAnswer": ""
             }
         ];
@@ -743,7 +743,7 @@
                 if (dx * dx + dy * dy < fruitRadius * fruitRadius) {
                     atLeastOneFruitIsCut = true;
                     const currentQuestion = questions[currentQuestionIndex];
-					/*
+					/*c
                     if (fruit.answer === currentQuestion.rigthAnswer) {
 
                         showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
@@ -843,7 +843,7 @@
                         gameLoop();
                         document.getElementById('throw').play();
                     });
-                }, 8000);
+                }, 9000);
             } else {
                 setTimeout(() => {
                     loadFruitImages(function (images) {
@@ -851,7 +851,7 @@
                         gameLoop();
                         document.getElementById('throw').play();
                     });
-                }, 3000);
+                }, 4000);
             }
 
         }
