@@ -743,6 +743,7 @@
                 if (dx * dx + dy * dy < fruitRadius * fruitRadius) {
                     atLeastOneFruitIsCut = true;
                     const currentQuestion = questions[currentQuestionIndex];
+					/*
                     if (fruit.answer === currentQuestion.rigthAnswer) {
 
                         showMessage('success', 1500); // Mostra la spunta animata per 1,5 secondi
@@ -751,6 +752,7 @@
                         showMessage('error', 1500); // Mostra la X animata per 1,5 secondi
                         document.getElementById('wrongAns').play();
                     }
+					*/
                     createFruitHalves(fruit, 0);
                     // proceedToNextQuestion(); // Vai subito alla prossima domanda
                 }
