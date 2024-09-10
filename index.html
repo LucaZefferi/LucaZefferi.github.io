@@ -376,18 +376,18 @@
             }
 
             35% {
-                opacity: 0.5;
-                transform: scale(1.5);
+                opacity: 0.8;
+                transform: scale(1.7);
             }
 
             70% {
-                opacity: 0.2;
-                transform: scale(1.5);
+                opacity: 0.4;
+                transform: scale(1.7);
             }
 
             100% {
                 opacity: 0;
-                transform: scale(1.5);
+                transform: scale(1.7);
             }
         }
 
@@ -1053,7 +1053,7 @@
             setTimeout(() => {
                 startTimer(); // Start the new timer
                 planetsContainer.classList.add('animate-float');
-            }, 2000);
+            }, 1700);
 
             canShoot = true;
         } else {
@@ -1321,6 +1321,7 @@
                         if (canShoot) {
                             canShoot = false;
 
+                            /*
                             if (planet.textContent === questions[currentQuestionIndex].rigthAnswer) {
                                 document.getElementById("success-audio").play();
                                 showMessage('success', 1500, planet); // Mostra la spunta animata per 1,5 secondi
@@ -1332,7 +1333,7 @@
 
                                 //document.getElementById('wrongAns').play();
                             }
-
+                            */
 
                             stopTimer()
                             createExplosion(planet);
