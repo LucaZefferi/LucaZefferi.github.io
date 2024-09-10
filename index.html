@@ -26,6 +26,52 @@
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
         }
+		
+		
+        .explosion-red{
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: url('img/rosso.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            pointer-events: none;
+			z-index: -10;
+            animation: explode 2.5s ease-out forwards;
+        }
+		.explosion-yellow {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: url('img/giallo.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            pointer-events: none;
+			z-index: -10;
+            animation: explode 2.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: scale(1.7);
+            }
+
+            35% {
+                opacity: 0.6;
+                transform: scale(1.7);
+            }
+
+            70% {
+                opacity: 0.4;
+                transform: scale(1.7);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.7);
+            }
+        }
 
         #gameArea {
             position: relative;
@@ -379,6 +425,9 @@
             filter: drop-shadow(0 30px 5px rgba(0, 0, 0, 0.3));
             animation: fadeIn 0.5s ease-in-out, bounce 0.5s ease-in-out;
         }
+		
+		
+		
     </style>
 </head>
 
@@ -753,12 +802,37 @@
                         document.getElementById('wrongAns').play();
                     }
 					*/
+					
                     createFruitHalves(fruit, 0);
+					createExplosion(x, y)
                     // proceedToNextQuestion(); // Vai subito alla prossima domanda
                 }
             }
         }
+		
+		
+		  function createExplosion(x, y) {
+            const explosion = document.createElement('div');
+			
+			if(currentFruitIndex===0 || currentFruitIndex===2 ){
+			explosion.classList.add('explosion-red');
+			}else{
+			explosion.classList.add('explosion-yellow');
+			}
+            
+           // const rect = targetElement.getBoundingClientRect();
+			 
+                		
+            explosion.style.left = x + 'px';
+            explosion.style.top = y + 'px';
+            document.body.appendChild(explosion);
+            // Rimuovi l'esplosione dopo l'animazione
+			
+            explosion.addEventListener('animationend', () => {
+                explosion.remove();
+            });
 
+		}
         function createFruitHalves(fruit, index) {
             const leftImg = new Image();
             leftImg.src = fruit.left_cut_img;
@@ -791,7 +865,8 @@
                 isLeft: false
             };
             fruits.push(rightHalf);
-
+			
+			
             setTimeout(() => {
                 fruits.splice(index, 1);
                 document.getElementById('splatter').play();
@@ -804,6 +879,7 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 checkFruitCollision(x, y);
+				
             }
         });
 
